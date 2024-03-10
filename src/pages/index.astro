@@ -10,7 +10,7 @@
 	import Hero from '../components/Hero.astro';
 	import Icon from '../components/Icon.astro';
 	import Pill from '../components/Pill.astro';
-	import PortfolioPreview from '../components/PortfolioPreview.astro';
+	import PortfolioPreview from '../components/WorkPreview.astro';
 
 	import Skills from '../components/Skills.astro';
 
@@ -26,8 +26,8 @@
 	<div class='stack gap-20 lg:gap-48'>
 		<div class='wrapper stack gap-8 lg:gap-20'>
 			<header class='hero'>
-				<Hero title='Hello, my name is Poramest Vichitnopawan'
-					tagline='I am a Senior Software Engineer who is currently based in Bangkok, Thailand. Looking for work in Japan'
+				<Hero title='こんにちは, my name is Poramest Vichitnopawan'
+					tagline='I am a Senior Software Engineer who is currently based in Bangkok, Thailand. Looking for a job in Japan.'
 					align='start'>
 					<div class='roles'>
 						<Pill>
@@ -46,7 +46,7 @@
 		</div>
 
 		<main class='wrapper stack gap-20 lg:gap-48'>
-			<section class='section with-background with-cta'>
+			<section class='section with-background bg-variant'>
 				<header class='section-header stack gap-2 lg:gap-4'>
 					<h3>Work</h3>
 					<p>
@@ -69,10 +69,9 @@
 
 			<section class='section with-background bg-variant'>
 				<header class='section-header stack gap-2 lg:gap-4'>
-					<h3>Mentions</h3>
+					<h3>Certification</h3>
 					<p>
-						I have been fortunate enough to receive praise for my work in
-						several publications. Take a look below to learn more.
+						Check out my certifications for a clear view of my skills and qualifications.
 					</p>
 				</header>
 
@@ -80,20 +79,36 @@
 					<Grid variant='small'>
 						{
 						[
-						'Medium',
-						'BuzzFeed',
-						'The Next Web',
-						'awwwards.',
-						'TechCrunch',
+						{ name: 'JLPT N3 Certification', image:
+						'public/assets/cert/jlpt-n3.jpg', description : `Certified proficiency at the Japanese Language
+						Proficiency Test (JLPT) Level N3.` },
+						{ name: 'CEFR B2 Certification', image:
+						'public/assets/cert/cefr.jpg', description : `Certified proficiency at the CEFR B2 (Upper
+						Intermediate) level.` },
+						{ name: 'Codegoda 2022', image: 'public/assets/cert/agoda-2022.jpg', description: `Ranking of
+						5,351 out of 49,454 participants.` },
+						{ name: 'Codegoda 2023', image: 'public/assets/cert/agoda-2023.jpg', description: `Ranking of
+						1,966 out of 50,233 participants.`},
+						{ name: 'AWS Cloud Practitioner Essentials', image: 'public/assets/cert/aws.jpg' , description:
+						`Certified in AWS Cloud Practitioner Essentials.` },
+						{ name: 'GitHub Pull Request Hackathon .ไทย Universal (2021)', image:
+						'public/assets/cert/github-pull-request.jpg', description : `Contribute to creating pull
+						requests for GitHub repositories to facilitate support for the .ไทย domain.` },
 						].map((brand) => (
-						<li class='mention-card'>
-							<p>{brand}</p>
+						<li class='mention-card' style='margin-right: 10px;'>
+							<div style='text-align: center;'>
+								<p style='margin-bottom: 5px;font-size: 20px;'>{brand.name}</p>
+								<img src={brand.image} alt={brand.name}
+									style='max-width: 100%;max-height: 450px; height: auto;' />
+								<p>{brand.description}</p>
+							</div>
 						</li>
 						))
 						}
 					</Grid>
 				</div>
 			</section>
+			<br />
 		</main>
 	</div>
 </BaseLayout>
@@ -224,7 +239,6 @@
 
 	.mention-card {
 		display: flex;
-		height: 7rem;
 		justify-content: center;
 		align-items: center;
 		text-align: center;
@@ -235,10 +249,21 @@
 		box-shadow: var(--shadow-sm);
 	}
 
-	@media (min-width: 50em) {
+	@media (min-width: 768px) {
 		.mention-card {
-			border-radius: 1.5rem;
-			height: 9.5rem;
+			height: 35rem;
+		}
+	}
+
+	@media (min-width: 1200px) {
+		.mention-card {
+			height: 65rem;
+		}
+	}
+
+	@media (min-width: 120em) {
+		.mention-card {
+			height: 35rem;
 		}
 	}
 </style>

@@ -4,7 +4,7 @@ workingYear: 2020-2021
 img: /assets/motif-logo.jpg
 img_alt: Motif Technology logo
 description: |
-  Senior Software Engineer
+  Software Engineer
 tags:
   - Java
   - Spring Boot
