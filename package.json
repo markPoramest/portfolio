@@ -2,10 +2,12 @@
   "name": "portfolio",
   "type": "module",
   "version": "0.0.1",
+  "homepage": "https://markPoramest.github.io/portfolio",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
+    "deploy": "gh-pages -d build",
     "preview": "astro preview",
     "astro": "astro"
   },
