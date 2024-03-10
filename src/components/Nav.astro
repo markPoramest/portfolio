@@ -69,10 +69,9 @@ const iconLinks: {
 							class:list={[
 								'link',
 								{
-									active:
-										Astro.url.pathname === href ||
-										(href !== '/portfolio' &&
-											Astro.url.pathname.startsWith(href)),
+									active: Astro.url.pathname === href,
+									// (href !== '/portfolio' &&
+									// 	Astro.url.pathname.startsWith(href)),
 								},
 							]}
 							href={href}
@@ -109,6 +108,8 @@ const iconLinks: {
 								'link',
 								{
 									active: Astro.url.pathname === href,
+									// (href !== '/portfolio' &&
+									// 	Astro.url.pathname.startsWith(href)),
 								},
 							]}
 							href={href}
