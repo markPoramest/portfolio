@@ -1,28 +1,34 @@
 ---
-	import { getCollection } from 'astro:content';
+import { getCollection } from 'astro:content';
 
-	import BaseLayout from '../layouts/BaseLayout.astro';
-	import PortfolioPreview from '../components/WorkPreview.astro';
-	import Hero from '../components/Hero.astro';
-	import Grid from '../components/Grid.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PortfolioPreview from '../components/WorkPreview.astro';
+import Hero from '../components/Hero.astro';
+import Grid from '../components/Grid.astro';
 
-	const projects = (await getCollection('work'))
+const projects = await getCollection('work');
 ---
 
-<BaseLayout title="My Work | Jeanine White" description="Learn about Jeanine White's most recent projects">
-	<div class="stack gap-20">
-		<main class="wrapper stack gap-8">
-			<Hero title="My Work" tagline="Explore highlights from my previous roles and responsibilities."
-				align="start" />
-			<Grid variant="small">
-				{
-				projects.map((project) => (
-				<li>
-					<PortfolioPreview project={project} />
-				</li>
-				))
-				}
-			</Grid>
-		</main>
-	</div>
+<BaseLayout
+  title='My Work | Mark Poramest'
+  description='Learn about Mark Poramest work'
+>
+  <div class='stack gap-20'>
+    <main class='wrapper stack gap-8'>
+      <Hero
+        title='My Work'
+        tagline='Explore highlights from my previous roles and responsibilities.'
+        align='start'
+      />
+      <Grid variant='small'>
+        {
+          projects.map((project) => (
+            <li>
+              <PortfolioPreview project={project} />
+            </li>
+          ))
+        }
+      </Grid>
+    </main>
+  </div>
 </BaseLayout>
