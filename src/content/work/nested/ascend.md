@@ -1,7 +1,7 @@
 ---
 title: Ascend Group
 workingYear: 2021-present
-img: /assets/ascend-logo.jpg
+img: /portfolio/assets/ascend-logo.jpg
 img_alt: Ascend Group Logo
 description: |
   Senior Software Engineer

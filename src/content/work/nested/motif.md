@@ -1,7 +1,7 @@
 ---
 title: Motif Technology
 workingYear: 2020-2021
-img: /assets/motif-logo.jpg
+img: /portfolio/assets/motif-logo.jpg
 img_alt: Motif Technology logo
 description: |
   Software Engineer

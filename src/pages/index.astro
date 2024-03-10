@@ -1,269 +1,307 @@
 ---
-	import { getCollection } from 'astro:content';
+import { getCollection } from 'astro:content';
 
-	// Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
-	import BaseLayout from '../layouts/BaseLayout.astro';
+// Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
+import BaseLayout from '../layouts/BaseLayout.astro';
 
-	// Component Imports
-	import CallToAction from '../components/CallToAction.astro';
-	import Grid from '../components/Grid.astro';
-	import Hero from '../components/Hero.astro';
-	import Icon from '../components/Icon.astro';
-	import Pill from '../components/Pill.astro';
-	import PortfolioPreview from '../components/WorkPreview.astro';
+// Component Imports
+import Grid from '../components/Grid.astro';
+import Hero from '../components/Hero.astro';
+import Icon from '../components/Icon.astro';
+import Pill from '../components/Pill.astro';
+import PortfolioPreview from '../components/WorkPreview.astro';
 
-	import Skills from '../components/Skills.astro';
+import Skills from '../components/Skills.astro';
 
-	// Content Fetching: List four most recent work projects
-	const projects = (await getCollection('work'))
-		.slice(0, 4);
+// Content Fetching: List four most recent work projects
+const projects = (await getCollection('work')).slice(0, 4);
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
 ---
 
 <BaseLayout>
-	<div class='stack gap-20 lg:gap-48'>
-		<div class='wrapper stack gap-8 lg:gap-20'>
-			<header class='hero'>
-				<Hero title='こんにちは, my name is Poramest Vichitnopawan'
-					tagline='I am a Senior Software Engineer who is currently based in Bangkok, Thailand. Looking for a job in Japan.'
-					align='start'>
-					<div class='roles'>
-						<Pill>
-							<Icon icon='code' size='1.33em' /> Developer
-						</Pill>
-						<Pill>
-							<Icon icon='translate' size='1.33em' /> Japanese
-						</Pill>
-					</div>
-				</Hero>
+  <div class='stack gap-20 lg:gap-48'>
+    <div class='wrapper stack gap-8 lg:gap-20'>
+      <header class='hero'>
+        <Hero
+          title='こんにちは, my name is Poramest Vichitnopawan'
+          tagline='I am a Senior Software Engineer who is currently based in Bangkok, Thailand. Looking for a job in Japan.'
+          align='start'
+        >
+          <div class='roles'>
+            <Pill>
+              <Icon
+                icon='code'
+                size='1.33em'
+              /> Developer
+            </Pill>
+            <Pill>
+              <Icon
+                icon='translate'
+                size='1.33em'
+              /> Japanese
+            </Pill>
+          </div>
+        </Hero>
 
-				<img alt='Mark image' width='480' height='620' src='/assets/portrait.jpg' />
-			</header>
+        <img
+          alt='Mark image'
+          width='480'
+          height='620'
+          src='/portfolio/assets/portrait.jpg'
+        />
+      </header>
 
-			<Skills />
-		</div>
+      <Skills />
+    </div>
 
-		<main class='wrapper stack gap-20 lg:gap-48'>
-			<section class='section with-background bg-variant'>
-				<header class='section-header stack gap-2 lg:gap-4'>
-					<h3>Work</h3>
-					<p>
-						Explore highlights from my previous roles and responsibilities.
-					</p>
-				</header>
+    <main class='wrapper stack gap-20 lg:gap-48'>
+      <section class='section with-background bg-variant'>
+        <header class='section-header stack gap-2 lg:gap-4'>
+          <h3>Work</h3>
+          <p>Explore highlights from my previous roles and responsibilities.</p>
+        </header>
 
-				<div class='gallery'>
-					<Grid variant='small'>
-						{
-						projects.map((project) => (
-						<li>
-							<PortfolioPreview project={project} />
-						</li>
-						))
-						}
-					</Grid>
-				</div>
-			</section>
+        <div class='gallery'>
+          <Grid variant='small'>
+            {
+              projects.map((project) => (
+                <li>
+                  <PortfolioPreview project={project} />
+                </li>
+              ))
+            }
+          </Grid>
+        </div>
+      </section>
 
-			<section class='section with-background bg-variant'>
-				<header class='section-header stack gap-2 lg:gap-4'>
-					<h3>Certification</h3>
-					<p>
-						Check out my certifications for a clear view of my skills and qualifications.
-					</p>
-				</header>
+      <section class='section with-background bg-variant'>
+        <header class='section-header stack gap-2 lg:gap-4'>
+          <h3>Certification</h3>
+          <p>
+            Check out my certifications for a clear view of my skills and
+            qualifications.
+          </p>
+        </header>
 
-				<div class='gallery'>
-					<Grid variant='small'>
-						{
-						[
-						{ name: 'JLPT N3 Certification', image:
-						'public/assets/cert/jlpt-n3.jpg', description : `Certified proficiency at the Japanese Language
-						Proficiency Test (JLPT) Level N3.` },
-						{ name: 'CEFR B2 Certification', image:
-						'public/assets/cert/cefr.jpg', description : `Certified proficiency at the CEFR B2 (Upper
-						Intermediate) level.` },
-						{ name: 'Codegoda 2022', image: 'public/assets/cert/agoda-2022.jpg', description: `Ranking of
-						5,351 out of 49,454 participants.` },
-						{ name: 'Codegoda 2023', image: 'public/assets/cert/agoda-2023.jpg', description: `Ranking of
-						1,966 out of 50,233 participants.`},
-						{ name: 'AWS Cloud Practitioner Essentials', image: 'public/assets/cert/aws.jpg' , description:
-						`Certified in AWS Cloud Practitioner Essentials.` },
-						{ name: 'GitHub Pull Request Hackathon .ไทย Universal (2021)', image:
-						'public/assets/cert/github-pull-request.jpg', description : `Contribute to creating pull
-						requests for GitHub repositories to facilitate support for the .ไทย domain.` },
-						].map((brand) => (
-						<li class='mention-card' style='margin-right: 10px;'>
-							<div style='text-align: center;'>
-								<p style='margin-bottom: 5px;font-size: 20px;'>{brand.name}</p>
-								<img src={brand.image} alt={brand.name}
-									style='max-width: 100%;max-height: 450px; height: auto;' />
-								<p>{brand.description}</p>
-							</div>
-						</li>
-						))
-						}
-					</Grid>
-				</div>
-			</section>
-			<br />
-		</main>
-	</div>
+        <div class='gallery'>
+          <Grid variant='small'>
+            {
+              [
+                {
+                  name: 'JLPT N3 Certification',
+                  image: 'public/assets/cert/jlpt-n3.jpg',
+                  description: `Certified proficiency at the Japanese Language
+						Proficiency Test (JLPT) Level N3.`,
+                },
+                {
+                  name: 'CEFR B2 Certification',
+                  image: 'public/assets/cert/cefr.jpg',
+                  description: `Certified proficiency at the CEFR B2 (Upper
+						Intermediate) level.`,
+                },
+                {
+                  name: 'Codegoda 2022',
+                  image: 'public/assets/cert/agoda-2022.jpg',
+                  description: `Ranking of
+						5,351 out of 49,454 participants.`,
+                },
+                {
+                  name: 'Codegoda 2023',
+                  image: 'public/assets/cert/agoda-2023.jpg',
+                  description: `Ranking of
+						1,966 out of 50,233 participants.`,
+                },
+                {
+                  name: 'AWS Cloud Practitioner Essentials',
+                  image: 'public/assets/cert/aws.jpg',
+                  description: `Certified in AWS Cloud Practitioner Essentials.`,
+                },
+                {
+                  name: 'GitHub Pull Request Hackathon .ไทย Universal (2021)',
+                  image: 'public/assets/cert/github-pull-request.jpg',
+                  description: `Contribute to creating pull
+						requests for GitHub repositories to facilitate support for the .ไทย domain.`,
+                },
+              ].map((brand) => (
+                <li
+                  class='mention-card'
+                  style='margin-right: 10px;'
+                >
+                  <div style='text-align: center;'>
+                    <p style='margin-bottom: 5px;font-size: 20px;'>
+                      {brand.name}
+                    </p>
+                    <img
+                      src={brand.image}
+                      alt={brand.name}
+                      style='max-width: 100%;max-height: 450px; height: auto;'
+                    />
+                    <p>{brand.description}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </Grid>
+        </div>
+      </section>
+      <br />
+    </main>
+  </div>
 </BaseLayout>
 
 <style>
-	.hero {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 2rem;
-	}
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
 
-	.roles {
-		display: none;
-	}
+  .roles {
+    display: none;
+  }
 
-	.hero img {
-		aspect-ratio: 5 / 4;
-		object-fit: cover;
-		object-position: top;
-		border-radius: 1.5rem;
-		box-shadow: var(--shadow-md);
-	}
+  .hero img {
+    aspect-ratio: 5 / 4;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow-md);
+  }
 
-	@media (min-width: 50em) {
-		.hero {
-			display: grid;
-			grid-template-columns: 6fr 4fr;
-			padding-inline: 2.5rem;
-			gap: 3.75rem;
-		}
+  @media (min-width: 50em) {
+    .hero {
+      display: grid;
+      grid-template-columns: 6fr 4fr;
+      padding-inline: 2.5rem;
+      gap: 3.75rem;
+    }
 
-		.roles {
-			margin-top: 0.5rem;
-			display: flex;
-			gap: 0.5rem;
-		}
+    .roles {
+      margin-top: 0.5rem;
+      display: flex;
+      gap: 0.5rem;
+    }
 
-		.hero img {
-			aspect-ratio: 3 / 4;
-			border-radius: 4.5rem;
-			object-fit: cover;
-		}
-	}
+    .hero img {
+      aspect-ratio: 3 / 4;
+      border-radius: 4.5rem;
+      object-fit: cover;
+    }
+  }
 
-	/* ====================================================== */
+  /* ====================================================== */
 
-	.section {
-		display: grid;
-		gap: 2rem;
-	}
+  .section {
+    display: grid;
+    gap: 2rem;
+  }
 
-	.with-background {
-		position: relative;
-	}
+  .with-background {
+    position: relative;
+  }
 
-	.with-background::before {
-		--hero-bg: var(--bg-image-subtle-2);
+  .with-background::before {
+    --hero-bg: var(--bg-image-subtle-2);
 
-		content: '';
-		position: absolute;
-		pointer-events: none;
-		left: 50%;
-		width: 100vw;
-		aspect-ratio: calc(2.25 / var(--bg-scale));
-		top: 0;
-		transform: translateY(-75%) translateX(-50%);
-		background:
-			url('/assets/backgrounds/noise.png') top center/220px repeat,
-			var(--hero-bg) center center / var(--bg-gradient-size) no-repeat,
-			var(--gray-999);
-		background-blend-mode: overlay, normal, normal, normal;
-		mix-blend-mode: var(--bg-blend-mode);
-		z-index: -1;
-	}
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    left: 50%;
+    width: 100vw;
+    aspect-ratio: calc(2.25 / var(--bg-scale));
+    top: 0;
+    transform: translateY(-75%) translateX(-50%);
+    background:
+      url('/portfolio/assets/backgrounds/noise.png') top center/220px repeat,
+      var(--hero-bg) center center / var(--bg-gradient-size) no-repeat,
+      var(--gray-999);
+    background-blend-mode: overlay, normal, normal, normal;
+    mix-blend-mode: var(--bg-blend-mode);
+    z-index: -1;
+  }
 
-	.with-background.bg-variant::before {
-		--hero-bg: var(--bg-image-subtle-1);
-	}
+  .with-background.bg-variant::before {
+    --hero-bg: var(--bg-image-subtle-1);
+  }
 
-	.section-header {
-		justify-self: center;
-		text-align: center;
-		max-width: 50ch;
-		font-size: var(--text-md);
-		color: var(--gray-300);
-	}
+  .section-header {
+    justify-self: center;
+    text-align: center;
+    max-width: 50ch;
+    font-size: var(--text-md);
+    color: var(--gray-300);
+  }
 
-	.section-header h3 {
-		font-size: var(--text-2xl);
-	}
+  .section-header h3 {
+    font-size: var(--text-2xl);
+  }
 
-	@media (min-width: 50em) {
-		.section {
-			grid-template-columns: repeat(4, 1fr);
-			grid-template-areas: 'header header header header''gallery gallery gallery gallery';
-			gap: 5rem;
-		}
+  @media (min-width: 50em) {
+    .section {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-areas: 'header header header header' 'gallery gallery gallery gallery';
+      gap: 5rem;
+    }
 
-		.section.with-cta {
-			grid-template-areas: 'header header header cta''gallery gallery gallery gallery';
-		}
+    .section.with-cta {
+      grid-template-areas: 'header header header cta' 'gallery gallery gallery gallery';
+    }
 
-		.section-header {
-			grid-area: header;
-			font-size: var(--text-lg);
-		}
+    .section-header {
+      grid-area: header;
+      font-size: var(--text-lg);
+    }
 
-		.section-header h3 {
-			font-size: var(--text-4xl);
-		}
+    .section-header h3 {
+      font-size: var(--text-4xl);
+    }
 
-		.with-cta .section-header {
-			justify-self: flex-start;
-			text-align: left;
-		}
+    .with-cta .section-header {
+      justify-self: flex-start;
+      text-align: left;
+    }
 
-		.gallery {
-			grid-area: gallery;
-		}
+    .gallery {
+      grid-area: gallery;
+    }
 
-		.cta {
-			grid-area: cta;
-		}
-	}
+    .cta {
+      grid-area: cta;
+    }
+  }
 
-	/* ====================================================== */
+  /* ====================================================== */
 
-	.mention-card {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		text-align: center;
-		border: 1px solid var(--gray-800);
-		border-radius: 1.5rem;
-		color: var(--gray-300);
-		background: var(--gradient-subtle);
-		box-shadow: var(--shadow-sm);
-	}
+  .mention-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 1px solid var(--gray-800);
+    border-radius: 1.5rem;
+    color: var(--gray-300);
+    background: var(--gradient-subtle);
+    box-shadow: var(--shadow-sm);
+  }
 
-	@media (min-width: 768px) {
-		.mention-card {
-			height: 35rem;
-		}
-	}
+  @media (min-width: 768px) {
+    .mention-card {
+      height: 35rem;
+    }
+  }
 
-	@media (min-width: 1200px) {
-		.mention-card {
-			height: 65rem;
-		}
-	}
+  @media (min-width: 1200px) {
+    .mention-card {
+      height: 65rem;
+    }
+  }
 
-	@media (min-width: 120em) {
-		.mention-card {
-			height: 35rem;
-		}
-	}
+  @media (min-width: 120em) {
+    .mention-card {
+      height: 35rem;
+    }
+  }
 </style>
