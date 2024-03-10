@@ -1,92 +1,138 @@
 ---
-	import Icon from './Icon.astro';
-	import ThemeToggle from './ThemeToggle.astro';
-	import type { iconPaths } from './IconPaths';
+import Icon from './Icon.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import type { iconPaths } from './IconPaths';
+import Button from './Button.astro';
 
-	/** Main menu items */
-	const textLinks: { label: string; href: string }[] = [
-		{ label: 'Home', href: '/portfolio' },
-		{ label: 'Work', href: '/portfolio/work/' },
-		{ label: 'About', href: '/portfolio/about/' },
-	];
+/** Main menu items */
+const textLinks: { label: string; href: string }[] = [
+	{ label: 'Home', href: '/portfolio' },
+	{ label: 'Work', href: '/portfolio/work/' },
+	{ label: 'About', href: '/portfolio/about/' },
+];
 
-	/** Icon links to social media — edit these with links to your profiles! */
-	const iconLinks: { label: string; href: string; icon: keyof typeof iconPaths }[] = [
-		{ label: 'Medium', href: 'https://medium.com/@TridentMark', icon: 'medium-logo' },
-		{ label: 'Linkedin', href: 'https://www.linkedin.com/in/poramest-vichitnopawan-8745851a1', icon: 'linkedin-logo' },
-		{ label: 'GitHub', href: 'https://github.com/markPoramest', icon: 'github-logo' }
-	];
+/** Icon links to social media — edit these with links to your profiles! */
+const iconLinks: {
+	label: string;
+	href: string;
+	icon: keyof typeof iconPaths;
+}[] = [
+	{
+		label: 'Medium',
+		href: 'https://medium.com/@TridentMark',
+		icon: 'medium-logo',
+	},
+	{
+		label: 'Linkedin',
+		href: 'https://www.linkedin.com/in/poramest-vichitnopawan-8745851a1',
+		icon: 'linkedin-logo',
+	},
+	{
+		label: 'GitHub',
+		href: 'https://github.com/markPoramest',
+		icon: 'github-logo',
+	},
+];
 ---
 
 <nav>
-	<div class="menu-header">
-		<a href="/" class="site-title">
-			<Icon icon="terminal-window" color="var(--accent-regular)" size="1.6em" gradient />
+	<div class='menu-header'>
+		<Button
+			buttonText='Download CV'
+			href='/public/assets/files/poramest-vichitnopawan.pdf'
+		/>
+		<a href='/' class='site-title'>
+			<Icon
+				icon='terminal-window'
+				color='var(--accent-regular)'
+				size='1.6em'
+				gradient
+			/>
 			Mark Poramest
 		</a>
 		<menu-button>
 			<template>
-				<button class="menu-button" aria-expanded="false">
-					<span class="sr-only">Menu</span>
-					<Icon icon="list" />
+				<button class='menu-button' aria-expanded='false'>
+					<span class='sr-only'>Menu</span>
+					<Icon icon='list' />
 				</button>
 			</template>
 		</menu-button>
 	</div>
 	<noscript>
-		<ul class="nav-items">
+		<ul class='nav-items'>
 			{
-			textLinks.map(({ label, href }) => (
-			<li>
-				<a aria-current={Astro.url.pathname===href} class:list={[ 'link' , { active: Astro.url.pathname===href
-					|| (href !=='/' && Astro.url.pathname.startsWith(href)), }, ]} href={href}>
-					{label}
-				</a>
-			</li>
-			))
+				textLinks.map(({ label, href }) => (
+					<li>
+						<a
+							aria-current={Astro.url.pathname === href}
+							class:list={[
+								'link',
+								{
+									active:
+										Astro.url.pathname === href ||
+										(href !== '/' && Astro.url.pathname.startsWith(href)),
+								},
+							]}
+							href={href}
+						>
+							{label}
+						</a>
+					</li>
+				))
 			}
 		</ul>
 	</noscript>
 	<noscript>
-		<div class="menu-footer">
-			<div class="socials">
+		<div class='menu-footer'>
+			<div class='socials'>
 				{
-				iconLinks.map(({ href, icon, label }) => (
-				<a href={href} class="social">
-					<span class="sr-only">{label}</span>
-					<Icon icon={icon} />
-				</a>
-				))
+					iconLinks.map(({ href, icon, label }) => (
+						<a href={href} class='social'>
+							<span class='sr-only'>{label}</span>
+							<Icon icon={icon} />
+						</a>
+					))
 				}
 			</div>
 		</div>
 	</noscript>
-	<div id="menu-content" hidden>
-		<ul class="nav-items">
+	<div id='menu-content' hidden>
+		<ul class='nav-items'>
 			{
-			textLinks.map(({ label, href }) => (
-			<li>
-				<a aria-current={Astro.url.pathname===href} class:list={[ 'link' , { active: Astro.url.pathname===href
-					|| (href !=='/' && Astro.url.pathname.startsWith(href)), }, ]} href={href}>
-					{label}
-				</a>
-			</li>
-			))
+				textLinks.map(({ label, href }) => (
+					<li>
+						<a
+							aria-current={Astro.url.pathname === href}
+							class:list={[
+								'link',
+								{
+									active:
+										Astro.url.pathname === href ||
+										(href !== '/' && Astro.url.pathname.startsWith(href)),
+								},
+							]}
+							href={href}
+						>
+							{label}
+						</a>
+					</li>
+				))
 			}
 		</ul>
-		<div class="menu-footer">
-			<div class="socials">
+		<div class='menu-footer'>
+			<div class='socials'>
 				{
-				iconLinks.map(({ href, icon, label }) => (
-				<a href={href} class="social">
-					<span class="sr-only">{label}</span>
-					<Icon icon={icon} />
-				</a>
-				))
+					iconLinks.map(({ href, icon, label }) => (
+						<a href={href} class='social'>
+							<span class='sr-only'>{label}</span>
+							<Icon icon={icon} />
+						</a>
+					))
 				}
 			</div>
 
-			<div class="theme-toggle">
+			<div class='theme-toggle'>
 				<ThemeToggle />
 			</div>
 		</div>
@@ -140,10 +186,12 @@
 	}
 
 	.menu-header {
-		display: flex;
-		justify-content: space-between;
-		gap: 0.5rem;
-		padding: 1.5rem;
+		display: flex; /* Use flexbox layout */
+		align-items: center; /* Align items vertically */
+	}
+
+	.menu-header > *:not(:first-child) {
+		margin-left: 0.5rem; /* Add margin between elements except for the first child */
 	}
 
 	.site-title {

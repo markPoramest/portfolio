@@ -1,0 +1,44 @@
+---
+import type { string } from 'astro/zod';
+
+export interface Props {
+	color?: string;
+	buttonText: string;
+	href?: string;
+}
+const { buttonText, href } = Astro.props;
+---
+
+<!-- Define a simple button component -->
+<astro>
+	<style>
+		.button {
+			background-color: var(--accent-overlay);
+			border: none;
+			color: rgb(255, 255, 255);
+			padding: 15px 32px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			margin: 4px 2px;
+			cursor: pointer;
+			border-radius: 10px;
+			transition-duration: 0.4s;
+		}
+
+		.button:hover {
+			background-color: var(--accent-regular);
+		}
+	</style>
+
+	{
+		href ? (
+			<a href={href} download class='button'>
+				{buttonText}
+			</a>
+		) : (
+			<button class='button'>{buttonText}</button>
+		)
+	}
+</astro>

@@ -11,6 +11,9 @@ dependencies:
   astro:
     specifier: ^4.4.15
     version: 4.4.15(typescript@5.4.2)
+  astro-navbar:
+    specifier: ^2.3.1
+    version: 2.3.1
   gh-pages:
     specifier: ^6.1.1
     version: 6.1.1
@@ -971,6 +974,10 @@ packages:
   /array-uniq@1.0.3:
     resolution: {integrity: sha512-MNha4BWQ6JbwhFhj03YK552f7cb3AzoE8SzeljgChvL1dl3IcvggXVz1DilzySZkCja+CXuZbdW7yATchWn8/Q==}
     engines: {node: '>=0.10.0'}
+    dev: false
+
+  /astro-navbar@2.3.1:
+    resolution: {integrity: sha512-lLvhWS03Qc3heMU23adFwEnBUJFlL6gxYi0xPvIyX1atb2oCov4kOS/MaWOPGnvj2nK63szebUzlG+NdIoUZzQ==}
     dev: false
 
   /astro@4.4.15(typescript@5.4.2):
