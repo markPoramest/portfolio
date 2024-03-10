@@ -11,6 +11,7 @@ tags:
   - PostgreSQL
   - Robot Framework
   - Jmeter
+  - Keycloak
 ---
 
 **_Senior Software Engineer (Jan 2024 - Present)_**
@@ -32,3 +33,5 @@ tags:
 - **Migrating** a legacy service from **Node.js to Golang** to harness the enhanced performance capabilities that Golang provides, ensuring a significant improvement in overall system quality. Successfully migrated a legacy service from Node.js to Golang, capitalizing on Golang's superior performance to enhance system efficiency and reliability.
   <br></br>
 - Creating a batch process to **generate user reports** for utilization in the front-end application. Developed a batch processing system to generate user reports, providing valuable insights for users through the front-end application.
+  <br></br>
+- Integrate **Keycloak** to optimize user authorization management within the back office environment, enhancing security, access control, and administrative efficiency.
