@@ -7,8 +7,8 @@ import Button from './Button.astro';
 /** Main menu items */
 const textLinks: { label: string; href: string }[] = [
 	{ label: 'Home', href: '/portfolio/' },
-	{ label: 'Work', href: '/portfolio/work/' },
-	{ label: 'About', href: '/portfolio/about/' },
+	{ label: 'Work', href: '/portfolio/work' },
+	{ label: 'About', href: '/portfolio/about' },
 ];
 
 /** Icon links to social media — edit these with links to your profiles! */
@@ -71,7 +71,7 @@ const iconLinks: {
 								{
 									active:
 										Astro.url.pathname === href ||
-										(href !== '/portfolio/' &&
+										(href !== '/portfolio' &&
 											Astro.url.pathname.startsWith(href)),
 								},
 							]}
@@ -108,10 +108,7 @@ const iconLinks: {
 							class:list={[
 								'link',
 								{
-									active:
-										Astro.url.pathname === href ||
-										(href !== '/portfolio/' &&
-											Astro.url.pathname.startsWith(href)),
+									active: Astro.url.pathname === href,
 								},
 							]}
 							href={href}
