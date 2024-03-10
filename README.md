@@ -1,30 +1,26 @@
-# Astro Starter Kit: Portfolio
+# Poramest's Portfolio
 
-```sh
-npm create astro@latest -- --template portfolio
-```
+Welcome to my portfolio! This repository showcases a collection of my projects and works, demonstrating my skills and experiences in various domains.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/portfolio)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/portfolio)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/portfolio/devcontainer.json)
+## About Me
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+I am currently exploring opportunities for a software engineering position in Japan. I possess a JLPT N3 certification for
+Japanese language proficiency and a CEFR B2 certification for English language proficiency. With over three years of experience, my
+expertise lies in the development of backend software using Golang and Java, and I take pride in my ability to enhance code quality. I
+am eager to contribute my skills and knowledge to a dynamic team in Japan.
 
-![portfolio](https://user-images.githubusercontent.com/357379/210779178-a98f0fb7-6b1a-4068-894c-8e1403e26654.jpg)
+## Skills
 
-## 🧞 Commands
+- **Programming Languages:** Golang, Java, Node Js
+- **Database:** PostgreSQL, Oracle, SQL Server, MySQL
+- **Technical Tools:** Jenkins, Git, JMeter, Sonar Lint, Pre-commit, Mountebank, Robot Framework, Docker, Kubernetes, Prometheus,
+Keycloak
 
-All commands are run from the root of the project, from a terminal:
+## Contact Information
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+Feel free to reach out to me if you have any inquiries or opportunities you'd like to discuss:
 
-## 👀 Want to learn more?
+- **Email:** <2411kjn@gmail.com>
+- **LinkedIn:** [Poramest Vichitnopawan](https://www.linkedin.com/in/poramest-vichitnopawan-8745851a1/)
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Thank you for visiting my portfolio! I hope you enjoy exploring my work.
