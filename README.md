@@ -1,6 +1,6 @@
 # Poramest's Portfolio
 
-Welcome to my portfolio! This repository showcases a collection of my projects and works, demonstrating my skills and experiences in various domains.
+Welcome to my portfolio! This repository showcases a collection of my projects and works, demonstrating my skills and experiences in various domains. You can see my full portfolio with this [My Portfolio](https://markporamest.github.io/portfolio/)
 
 ## About Me
 
