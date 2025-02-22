@@ -5,7 +5,7 @@ Welcome to my portfolio! This repository showcases a collection of my projects a
 ## About Me
 
 I am currently exploring opportunities for a software engineering position in Japan. I possess a JLPT N3 certification for
-Japanese language proficiency and a CEFR C1 certification for English language proficiency. With over three years of experience, my
+Japanese language proficiency and a CEFR C1 certification for English language proficiency. With over four years of experience, my
 expertise lies in the development of backend software using Golang and Java, and I take pride in my ability to enhance code quality. I
 am eager to contribute my skills and knowledge to a dynamic team in Japan.
 
