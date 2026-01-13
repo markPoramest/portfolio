@@ -12,18 +12,20 @@ tags:
   - Robot Framework
   - Jmeter
   - Keycloak
+  - Redis
 ---
 
 **_Senior Software Engineer (Jan 2024 - Present)_**
 
 **_Software Engineer (Dec 2021 - Dec 2023)_**
 
-- **Develop a Mutual Fund Web Application** within the True Money Application. This involved designing and implementing a web-based platform for managing mutual fund investments, integrating seamlessly within the True Money ecosystem.
+- **Develop a Mutual Fund Web Application** within the True Money Application. This involved designing and implementing a web-based platform for managing mutual fund investments, and designed API specifications and implemented
+  them in a microservices architecture.
   <br></br>
-- **Design API specifications** and implement user account service components. Defined clear API specifications for user account services and implemented them to ensure seamless functionality and user management.
+- **Utilized Redis** for storing credential data (such as phone-no and API token) to manage and optimize authentication processes.
   <br></br>
 - **Creation of api gateways** for seamless integration with other services. Developed gateways to facilitate smooth integration with external services, enabling efficient communication and data exchange and create backend-for-frontend (BFF) APIs to manage actions and serve data to the frontend
-efficiently.
+  efficiently.
   <br></br>
 - Ensured that the code performance included more than **90% coverage in unit tests** and had sufficient capacity to handle the expected user load. Rigorous unit testing was conducted to achieve over 90% code coverage, ensuring robustness and reliability under varying user loads.
   <br></br>
@@ -31,6 +33,6 @@ efficiently.
   <br></br>
 - Develop an internal library for specific use cases, such as **logging request and response data** when communicating with external services. Created a reusable library to facilitate logging of request and response data during interactions with external services, enhancing debugging and monitoring capabilities.
   <br></br>
-- **Migrating** a legacy service from **Node.js to Golang** to harness the enhanced performance capabilities that Golang provides, ensuring a significant improvement in overall system quality. Successfully migrated a legacy service from Node.js to Golang, capitalizing on Golang's superior performance to enhance system efficiency and reliability.
+- **Migrating** a legacy service from Node.js to Golang, enhancing performance and reducing operational costs.
   <br></br>
 - Integrate **Keycloak** to optimize user authorization management within the back office environment, enhancing security, access control, and administrative efficiency.
