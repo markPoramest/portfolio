@@ -14,7 +14,8 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 
 // Clean up image path if it exists in frontmatter
-const imageUrl = entry.data.image ? entry.data.image.replace('../../../public', '') : null;
+const cleanPath = entry.data.image ? entry.data.image.replace('../../../public', '') : null;
+const imageUrl = cleanPath ? `${import.meta.env.BASE_URL}${cleanPath}`.replace('//', '/') : null;
 ---
 
 <Layout title={`${entry.data.title} | My Work`}>
