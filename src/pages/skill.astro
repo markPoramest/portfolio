@@ -1,0 +1,180 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const skills = {
+  "Programming": ["Go", "Java", "Node Js", "Flutter", "React"],
+  "Databases": ["PostgreSQL", "CouchDB", "MongoDB", "Redis"],
+  "DevOps & Infrastructure": ["Docker", "Kubernetes", "Grafana", "Jenkins"],
+  "Testing": ["Robot Framework", "Playwright","JMeter"]
+};
+---
+
+<Layout title="Skills | Your Name">
+  <!-- Subtle background pattern -->
+  <div class="relative w-full min-h-screen overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none opacity-20 dark:opacity-10" style="background-image: radial-gradient(circle at 2px 2px, var(--tw-prose-body) 1px, transparent 0); background-size: 32px 32px;"></div>
+
+    <div class="container mx-auto px-6 py-24 relative z-10">
+
+      <div class="text-center mb-20 animate-on-scroll">
+        <h1 class="text-5xl font-bold text-wabi-text dark:text-tokyo-text inline-block relative">
+          Skills & Proficiency
+          <span class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-24 h-1 bg-wabi-accent dark:bg-tokyo-accent rounded-full"></span>
+        </h1>
+        <p class="mt-8 text-wabi-secondary dark:text-tokyo-secondary max-w-2xl mx-auto">
+          A comprehensive overview of my technical toolkit and linguistic capabilities, forged through years of continuous learning and practical application.
+        </p>
+      </div>
+
+      <!-- Technical Stack -->
+      <section id="tech-stack" class="mb-28">
+        <h2 class="text-3xl text-center mb-12 flex items-center justify-center gap-3 text-wabi-text dark:text-tokyo-text animate-on-scroll" style="transition-delay: 100ms;">
+          <svg class="w-8 h-8 text-wabi-accent dark:text-tokyo-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+          Technical Expertise
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+
+          <!-- Programming Skills Card -->
+          <div class="group bg-wabi-bg dark:bg-white/5 border border-wabi-secondary/20 dark:border-tokyo-secondary/20 rounded-xl p-8 hover:border-wabi-accent dark:hover:border-tokyo-accent transition-all duration-300 hover:-translate-y-2 shadow-sm hover:shadow-xl dark:shadow-none relative overflow-hidden animate-on-scroll" style="transition-delay: 200ms;">
+            <div class="absolute top-0 right-0 w-20 h-20 bg-wabi-accent/5 dark:bg-tokyo-accent/10 rounded-bl-full -mr-10 -mt-10 transition-transform group-hover:scale-150"></div>
+            <h3 class="font-bold text-xl mb-4 text-wabi-text dark:text-tokyo-text">Programming</h3>
+            <ul class="space-y-2">
+              {skills.Programming.map(item => (
+                <li class="flex items-center text-sm text-wabi-secondary dark:text-tokyo-secondary group-hover:text-wabi-text dark:group-hover:text-tokyo-text transition-colors">
+                  <span class="w-1.5 h-1.5 rounded-full bg-wabi-accent dark:bg-tokyo-accent mr-3"></span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Database Card -->
+          <div class="group bg-wabi-bg dark:bg-white/5 border border-wabi-secondary/20 dark:border-tokyo-secondary/20 rounded-xl p-8 hover:border-wabi-accent dark:hover:border-tokyo-accent transition-all duration-300 hover:-translate-y-2 shadow-sm hover:shadow-xl dark:shadow-none relative overflow-hidden animate-on-scroll" style="transition-delay: 300ms;">
+             <div class="absolute top-0 right-0 w-20 h-20 bg-wabi-accent/5 dark:bg-tokyo-accent/10 rounded-bl-full -mr-10 -mt-10 transition-transform group-hover:scale-150"></div>
+            <h3 class="font-bold text-xl mb-4 text-wabi-text dark:text-tokyo-text">Databases</h3>
+            <ul class="space-y-2">
+              {skills["Databases"].map(item => (
+                <li class="flex items-center text-sm text-wabi-secondary dark:text-tokyo-secondary group-hover:text-wabi-text dark:group-hover:text-tokyo-text transition-colors">
+                  <span class="w-1.5 h-1.5 rounded-full bg-wabi-accent dark:bg-tokyo-accent mr-3"></span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- DevOps Card -->
+          <div class="group bg-wabi-bg dark:bg-white/5 border border-wabi-secondary/20 dark:border-tokyo-secondary/20 rounded-xl p-8 hover:border-wabi-accent dark:hover:border-tokyo-accent transition-all duration-300 hover:-translate-y-2 shadow-sm hover:shadow-xl dark:shadow-none relative overflow-hidden animate-on-scroll" style="transition-delay: 400ms;">
+             <div class="absolute top-0 right-0 w-20 h-20 bg-wabi-accent/5 dark:bg-tokyo-accent/10 rounded-bl-full -mr-10 -mt-10 transition-transform group-hover:scale-150"></div>
+            <h3 class="font-bold text-xl mb-4 text-wabi-text dark:text-tokyo-text">DevOps</h3>
+            <ul class="space-y-2">
+              {skills["DevOps & Infrastructure"].map(item => (
+                <li class="flex items-center text-sm text-wabi-secondary dark:text-tokyo-secondary group-hover:text-wabi-text dark:group-hover:text-tokyo-text transition-colors">
+                  <span class="w-1.5 h-1.5 rounded-full bg-wabi-accent dark:bg-tokyo-accent mr-3"></span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Testing Card -->
+          <div class="group bg-wabi-bg dark:bg-white/5 border border-wabi-secondary/20 dark:border-tokyo-secondary/20 rounded-xl p-8 hover:border-wabi-accent dark:hover:border-tokyo-accent transition-all duration-300 hover:-translate-y-2 shadow-sm hover:shadow-xl dark:shadow-none relative overflow-hidden animate-on-scroll" style="transition-delay: 500ms;">
+             <div class="absolute top-0 right-0 w-20 h-20 bg-wabi-accent/5 dark:bg-tokyo-accent/10 rounded-bl-full -mr-10 -mt-10 transition-transform group-hover:scale-150"></div>
+            <h3 class="font-bold text-xl mb-4 text-wabi-text dark:text-tokyo-text">Testing</h3>
+            <ul class="space-y-2">
+              {skills.Testing.map(item => (
+                <li class="flex items-center text-sm text-wabi-secondary dark:text-tokyo-secondary group-hover:text-wabi-text dark:group-hover:text-tokyo-text transition-colors">
+                  <span class="w-1.5 h-1.5 rounded-full bg-wabi-accent dark:bg-tokyo-accent mr-3"></span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Language Proficiency -->
+      <section id="languages" class="max-w-4xl mx-auto">
+        <h2 class="text-3xl text-center mb-12 flex items-center justify-center gap-3 text-wabi-text dark:text-tokyo-text animate-on-scroll">
+           <svg class="w-8 h-8 text-wabi-accent dark:text-tokyo-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path></svg>
+           Linguistics
+        </h2>
+
+        <div class="flex flex-col md:flex-row justify-center items-stretch gap-8">
+
+          <div class="relative flex-1 bg-wabi-bg dark:bg-tokyo-bg border border-wabi-secondary/30 dark:border-tokyo-secondary/30 rounded-2xl p-8 overflow-hidden group hover:border-wabi-accent dark:hover:border-tokyo-accent transition-colors duration-300 animate-on-scroll" style="transition-delay: 100ms;">
+            <!-- Japanese character background decorative -->
+            <div class="absolute -right-8 -bottom-6 text-9xl font-serif text-wabi-secondary/5 dark:text-tokyo-secondary/5 group-hover:text-wabi-accent/5 dark:group-hover:text-tokyo-accent/10 transition-colors duration-500 pointer-events-none select-none">
+              ก
+            </div>
+
+            <div class="relative z-10 flex flex-col h-full justify-between">
+              <div>
+                <h3 class="text-3xl font-bold mb-2">Thai</h3>
+              </div>
+              <div class="flex items-end justify-between">
+                   <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-wabi-accent/10 text-wabi-accent dark:bg-tokyo-accent/20 dark:text-tokyo-accent">
+                     Native
+                   </span>
+                <div class="flex gap-1">
+                  <!-- 5 dots representing level -->
+                  {[1,2,3,4,5].map(() => <div class="w-2 h-2 rounded-full bg-wabi-accent dark:bg-tokyo-accent"></div>)}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="relative flex-1 bg-wabi-bg dark:bg-tokyo-bg border border-wabi-secondary/30 dark:border-tokyo-secondary/30 rounded-2xl p-8 overflow-hidden group hover:border-wabi-accent dark:hover:border-tokyo-accent transition-colors duration-300 animate-on-scroll" style="transition-delay: 100ms;">
+             <!-- Japanese character background decorative -->
+             <div class="absolute -right-8 -bottom-6 text-9xl font-serif text-wabi-secondary/5 dark:text-tokyo-secondary/5 group-hover:text-wabi-accent/5 dark:group-hover:text-tokyo-accent/10 transition-colors duration-500 pointer-events-none select-none">
+                語
+             </div>
+
+             <div class="relative z-10 flex flex-col h-full justify-between">
+                <div>
+                   <h3 class="text-3xl font-bold mb-2">Japanese</h3>
+                </div>
+                <div class="flex items-end justify-between">
+                   <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-wabi-accent/10 text-wabi-accent dark:bg-tokyo-accent/20 dark:text-tokyo-accent">
+                     JLPT N2
+                   </span>
+                  <div class="flex gap-1">
+                    <!-- 4.5 dots representing level -->
+                    {[1,2,3].map(() => <div class="w-2 h-2 rounded-full bg-wabi-accent dark:bg-tokyo-accent"></div>)}
+                    <div class="w-2 h-2 rounded-full bg-wabi-accent/30 dark:bg-tokyo-accent/30"></div>
+                    <div class="w-2 h-2 rounded-full bg-wabi-accent/30 dark:bg-tokyo-accent/30"></div>
+                  </div>
+                </div>
+             </div>
+          </div>
+
+          <div class="relative flex-1 bg-wabi-bg dark:bg-tokyo-bg border border-wabi-secondary/30 dark:border-tokyo-secondary/30 rounded-2xl p-8 overflow-hidden group hover:border-wabi-accent dark:hover:border-tokyo-accent transition-colors duration-300 animate-on-scroll" style="transition-delay: 200ms;">
+             <!-- English character background decorative -->
+             <div class="absolute -right-6 -bottom-6 text-9xl font-serif text-wabi-secondary/5 dark:text-tokyo-secondary/5 group-hover:text-wabi-accent/5 dark:group-hover:text-tokyo-accent/10 transition-colors duration-500 pointer-events-none select-none italic">
+                A
+             </div>
+
+             <div class="relative z-10 flex flex-col h-full justify-between">
+                <div>
+                   <h3 class="text-3xl font-bold mb-2">English</h3>
+                </div>
+                <div class="flex items-end justify-between">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-wabi-accent/10 text-wabi-accent dark:bg-tokyo-accent/20 dark:text-tokyo-accent">
+                     CEFR C1
+                   </span>
+                   <div class="flex gap-1">
+                     <!-- 4.5 dots representing level -->
+                     {[1,2,3,4].map(() => <div class="w-2 h-2 rounded-full bg-wabi-accent dark:bg-tokyo-accent"></div>)}
+                     <div class="w-2 h-2 rounded-full bg-wabi-accent/30 dark:bg-tokyo-accent/30"></div>
+                   </div>
+                </div>
+             </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </div>
+</Layout>

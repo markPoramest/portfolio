@@ -1,0 +1,139 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+
+const navLinks = [
+  { href: '/', text: 'Home' },
+  { href: '/work', text: 'Work' },
+  { href: '/skill', text: 'Skills' },
+  { href: '/passions', text: 'Passions' },
+  { href: '/contact', text: 'Contact' },
+];
+---
+<header id="main-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
+  <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="/" class="text-xl font-bold text-wabi-text dark:text-tokyo-text hover:text-wabi-accent dark:hover:text-tokyo-accent transition-colors">
+      My Portfolio
+    </a>
+
+    <div class="hidden md:flex items-center space-x-8">
+      {navLinks.map(link => (
+        <a href={link.href} class="nav-link relative text-wabi-text dark:text-tokyo-text hover:text-wabi-accent dark:hover:text-tokyo-accent transition-colors group">
+          {link.text}
+          <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-wabi-accent dark:bg-tokyo-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out"></span>
+        </a>
+      ))}
+    </div>
+
+    <div class="flex items-center gap-4">
+       <a href="../../public/file/poramest-cv.pdf" download class="hidden sm:inline-block bg-wabi-accent text-wabi-bg dark:bg-tokyo-accent dark:text-tokyo-bg font-bold py-2 px-4 rounded-lg hover:opacity-90 transition-opacity">
+        Download CV
+      </a>
+      <ThemeToggle />
+      <div class="md:hidden">
+        <button id="mobile-menu-button" class="text-wabi-text dark:text-tokyo-text focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-wabi-bg/95 dark:bg-tokyo-bg/95 backdrop-blur-lg">
+    <div class="container mx-auto px-6 py-4 flex flex-col items-center space-y-4">
+      {navLinks.map(link => (
+        <a href={link.href} class="nav-link-mobile text-lg text-wabi-text dark:text-tokyo-text hover:text-wabi-accent dark:hover:text-tokyo-accent transition-colors">{link.text}</a>
+      ))}
+       <a href="/cv.pdf" download class="mt-4 w-full text-center bg-wabi-accent text-wabi-bg dark:bg-tokyo-accent dark:text-tokyo-bg font-bold py-3 px-4 rounded-lg hover:opacity-90 transition-opacity">
+        Download CV
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const header = document.getElementById('main-header');
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const mobileNavLinks = document.querySelectorAll('.nav-link-mobile');
+    const currentPath = window.location.pathname;
+
+    // Active link styling
+    const setActiveLink = (links) => {
+      links.forEach(link => {
+        // Handle root path matching
+        const linkPath = link.getAttribute('href');
+        const isActive = linkPath === '/' ? currentPath === '/' : currentPath.startsWith(linkPath);
+
+        if (isActive) {
+          link.classList.add('is-active');
+        }
+      });
+    };
+
+    setActiveLink(navLinks);
+    setActiveLink(mobileNavLinks);
+
+    // Mobile menu toggle
+    if (mobileMenuButton && mobileMenu) {
+      mobileMenuButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
+
+    // Close mobile menu when clicking a link or outside
+    document.addEventListener('click', (e) => {
+      if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+        if (!mobileMenu.contains(e.target) && e.target !== mobileMenuButton) {
+          mobileMenu.classList.add('hidden');
+        }
+        if (e.target.classList.contains('nav-link-mobile')) {
+          mobileMenu.classList.add('hidden');
+        }
+      }
+    });
+
+    // Header scroll effect
+    let lastScrollTop = 0;
+    window.addEventListener('scroll', () => {
+      if (!header) return;
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (scrollTop > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+
+      if (scrollTop > lastScrollTop && scrollTop > 200) {
+        // Downscroll
+        header.classList.add('-translate-y-full');
+      } else {
+        // Upscroll
+        header.classList.remove('-translate-y-full');
+      }
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    });
+  });
+</script>
+
+<style>
+  #main-header.scrolled {
+    @apply bg-wabi-bg/80 dark:bg-tokyo-bg/80 backdrop-blur-sm shadow-lg;
+  }
+
+  .nav-link.is-active {
+    @apply text-wabi-accent dark:text-tokyo-accent;
+  }
+
+  .nav-link.is-active::after {
+    content: '';
+    @apply absolute -bottom-1 left-0 w-full h-0.5 bg-wabi-accent dark:bg-tokyo-accent transform scale-x-100;
+  }
+
+  .nav-link-mobile.is-active {
+    @apply text-wabi-accent dark:text-tokyo-accent;
+  }
+</style>

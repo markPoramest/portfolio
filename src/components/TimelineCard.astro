@@ -1,0 +1,28 @@
+---
+export interface Props {
+  company: string;
+  date: string;
+  link: string;
+  delay: string;
+  location: string;
+}
+
+const { company, date, link, delay, location } = Astro.props;
+---
+
+<a href={link}
+   class="timeline-card opacity-0 translate-y-[20px] bg-wabi-bg dark:bg-tokyo-bg border-2 border-wabi-secondary/50 dark:border-tokyo-secondary/50 rounded-lg p-4 w-32 md:w-48 text-center hover:border-wabi-accent dark:hover:border-tokyo-accent transition-all duration-300 block -mt-4"
+   style={`animation-delay: ${delay};`}
+>
+  <div class="font-bold text-xl md:text-2xl">
+    {company}
+  </div>
+
+  <div class="mt-1 text-sm opacity-70">
+    {location}
+  </div>
+
+  <div class="text-sm opacity-70">
+    {date}
+  </div>
+</a>

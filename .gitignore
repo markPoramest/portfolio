@@ -1,23 +1,27 @@
-# build output
-dist/
-# generated types
+# Dependencies
+/node_modules
+/.pnpm-store
+
+# Astro
+/dist
+/.astro
 .astro/
 
-# dependencies
-node_modules/
-
-# logs
+# Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-
-# environment variables
+# Environment
 .env
-.env.production
+.env*.local
 
-# macOS-specific files
+# IDEs
+.idea/
+.vscode/
+*.swp
+
+# OS
 .DS_Store
-
-.idea
+Thumbs.db

@@ -1,24 +1,51 @@
-# Poramest's Portfolio
+# Personal Portfolio - Built with Astro & Tailwind CSS
 
-Welcome to my portfolio! This repository showcases a collection of my projects and works, demonstrating my skills and experiences in various domains. You can see my full portfolio with this [My Portfolio](https://markporamest.github.io/portfolio/).
+This is a personal portfolio website built with [Astro](https://astro.build/) and styled with [Tailwind CSS](https://tailwindcss.com/). It features a minimalist, responsive design with a dual-theme (light/dark) system inspired by Japanese aesthetics.
 
-## About Me
+![Homepage Screenshot](public/screenshot.png) <!-- You can add a screenshot of your site here -->
 
-Senior Software Engineer with 5+ years of experience specializing in Golang and microservices architecture, including
-utilizing Redis for high-performance caching. Skilled in designing scalable APIs, optimizing system performance, and migrating
-legacy systems. Committed to writing high-quality, maintainable code and improving system efficiency.
+## ✨ Features
 
-## Skills
+-   **Dual Theme**: Light (Wabi-Sabi) and Dark (Midnight Tokyo) modes with a theme toggler.
+-   **Responsive Design**: Fully responsive layout for all devices.
+-   **Astro View Transitions**: Smooth, seamless page transitions.
+-   **Animated Work Timeline**: An unfolding, animated timeline to showcase work experience.
+-   **Dynamic Routing**: Work detail pages are dynamically generated from Markdown files.
+-   **Clean & Modular Code**: Built with reusable Astro components.
 
-- **Programming Languages:** Golang, Java, Node Js
-- **Database:** PostgreSQL, SQL Server, MySQL
-- **Technical Tools:** Jenkins, Git, JMeter, Redis, Sonar Lint, Grafana, Robot Framework, Docker, Kubernetes, Prometheus, Keycloak.
+## 🚀 Project Setup
 
-## Contact Information
+1.  **Clone the repository:**
+    ```bash
+    git clone <your-repo-url>
+    cd <your-repo-name>
+    ```
 
-Feel free to reach out to me if you have any inquiries or opportunities you'd like to discuss:
+2.  **Install dependencies (using pnpm):**
+    ```bash
+    pnpm install
+    ```
 
-- **Email:** <2411kjn@gmail.com>
-- **LinkedIn:** [Poramest Vichitnopawan](https://www.linkedin.com/in/poramest-vichitnopawan-8745851a1/)
+3.  **Run the development server:**
+    ```bash
+    pnpm dev
+    ```
+    The site will be available at `http://localhost:4321`.
 
-Thank you for visiting my portfolio! I hope you enjoy exploring my work.
+## Commands
+
+| Command           | Action                                       |
+| :---------------- | :------------------------------------------- |
+| `pnpm install`    | Installs dependencies                        |
+| `pnpm dev`        | Starts local dev server at `localhost:4321`  |
+| `pnpm build`      | Build your production site to `./dist/`      |
+| `pnpm preview`    | Preview your build locally, before deploying |
+
+## Customize
+
+-   **Content**: Edit the Markdown files in `src/content/work/` to update your work experience. Update `src/pages/me.astro` for the main bio and other sections.
+-   **Styling**: Modify the color palette and other design tokens in `tailwind.config.mjs`.
+-   **Images**: Replace `public/profile.jpg` with your own profile picture.
+
+---
+Built with ❤️ and code.
