@@ -95,10 +95,12 @@ const navLinks = [
     const currentPath = window.location.pathname;
 
     // Active link styling
+    // Active link styling
     const setActiveLink = (links) => {
       links.forEach((link) => {
-        const linkPath = link.getAttribute("href");
+        link.classList.remove("is-active");
 
+        const linkPath = link.getAttribute("href");
         const cleanCurrent = currentPath.replace(/\/$/, "");
         const cleanLink = linkPath.replace(/\/$/, "");
 
@@ -112,8 +114,6 @@ const navLinks = [
 
         if (isActive) {
           link.classList.add("is-active");
-        } else {
-          link.classList.remove("is-active");
         }
       });
     };
