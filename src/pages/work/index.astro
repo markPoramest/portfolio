@@ -25,7 +25,7 @@ workEntries.sort((a, b) => b.slug.localeCompare(a.slug));
 
       <div class="max-w-3xl mx-auto space-y-12">
         {workEntries.map((entry, index) => (
-          <a href={`/work/${entry.slug}`} class="group block bg-wabi-bg dark:bg-white/5 border border-wabi-secondary/20 dark:border-tokyo-secondary/20 rounded-xl p-8 hover:border-wabi-accent dark:hover:border-tokyo-accent transition-all duration-300 hover:scale-[1.02] shadow-sm hover:shadow-xl dark:shadow-none relative overflow-hidden animate-on-scroll" style={`transition-delay: ${index * 100}ms;`}>
+          <a href={`/portfolio/work/${entry.slug}`} class="group block bg-wabi-bg dark:bg-white/5 border border-wabi-secondary/20 dark:border-tokyo-secondary/20 rounded-xl p-8 hover:border-wabi-accent dark:hover:border-tokyo-accent transition-all duration-300 hover:scale-[1.02] shadow-sm hover:shadow-xl dark:shadow-none relative overflow-hidden animate-on-scroll" style={`transition-delay: ${index * 100}ms;`}>
             <div class="absolute top-0 right-0 w-24 h-24 bg-wabi-accent/5 dark:bg-tokyo-accent/10 rounded-bl-full -mr-12 -mt-12 transition-transform group-hover:scale-150"></div>
             <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
               <h2 class="text-2xl font-bold text-wabi-text dark:text-tokyo-text group-hover:text-wabi-accent dark:group-hover:text-tokyo-accent transition-colors relative z-10">{entry.data.title}</h2>
