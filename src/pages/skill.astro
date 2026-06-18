@@ -125,7 +125,7 @@ const skills = {
             </div>
           </div>
 
-          <div class="relative flex-1 bg-wabi-bg dark:bg-tokyo-bg border border-wabi-secondary/30 dark:border-tokyo-secondary/30 rounded-2xl p-8 overflow-hidden group hover:border-wabi-accent dark:hover:border-tokyo-accent transition-colors duration-300 animate-on-scroll" style="transition-delay: 100ms;">
+          <div data-cert="/portfolio/cert/jlpt-n2.jpg" class="cert-item relative flex-1 bg-wabi-bg dark:bg-tokyo-bg border border-wabi-secondary/30 dark:border-tokyo-secondary/30 rounded-2xl p-8 overflow-hidden group hover:border-wabi-accent dark:hover:border-tokyo-accent transition-all duration-300 cursor-pointer animate-on-scroll" style="transition-delay: 100ms;">
              <!-- Japanese character background decorative -->
              <div class="absolute -right-8 -bottom-6 text-9xl font-serif text-wabi-secondary/5 dark:text-tokyo-secondary/5 group-hover:text-wabi-accent/5 dark:group-hover:text-tokyo-accent/10 transition-colors duration-500 pointer-events-none select-none">
                 語
@@ -149,7 +149,7 @@ const skills = {
              </div>
           </div>
 
-          <div class="relative flex-1 bg-wabi-bg dark:bg-tokyo-bg border border-wabi-secondary/30 dark:border-tokyo-secondary/30 rounded-2xl p-8 overflow-hidden group hover:border-wabi-accent dark:hover:border-tokyo-accent transition-colors duration-300 animate-on-scroll" style="transition-delay: 200ms;">
+          <div data-cert="/portfolio/cert/cefr.jpg" class="cert-item relative flex-1 bg-wabi-bg dark:bg-tokyo-bg border border-wabi-secondary/30 dark:border-tokyo-secondary/30 rounded-2xl p-8 overflow-hidden group hover:border-wabi-accent dark:hover:border-tokyo-accent transition-all duration-300 cursor-pointer animate-on-scroll" style="transition-delay: 200ms;">
              <!-- English character background decorative -->
              <div class="absolute -right-6 -bottom-6 text-9xl font-serif text-wabi-secondary/5 dark:text-tokyo-secondary/5 group-hover:text-wabi-accent/5 dark:group-hover:text-tokyo-accent/10 transition-colors duration-500 pointer-events-none select-none italic">
                 A
@@ -177,4 +177,73 @@ const skills = {
 
     </div>
   </div>
+
+  <!-- Certificate Modal -->
+  <div id="certModal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-black/70 backdrop-blur-sm transition-opacity duration-300 opacity-0">
+    <div id="modalContent" class="bg-wabi-bg dark:bg-tokyo-bg rounded-2xl shadow-2xl w-full max-w-3xl mx-4 p-4 relative transform scale-95 transition-all duration-300">
+      <button id="closeCertModal" class="absolute -top-4 -right-4 w-10 h-10 bg-wabi-accent text-wabi-bg rounded-full flex items-center justify-center shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-wabi-accent hover:opacity-90 z-10">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+      <div class="w-full h-full min-h-[400px] flex items-center justify-center bg-wabi-secondary/10 dark:bg-tokyo-secondary/10 rounded-lg overflow-hidden">
+         <img id="certImage" src="" alt="Certificate" class="max-w-full max-h-[80vh] object-contain">
+      </div>
+    </div>
+  </div>
 </Layout>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    // Certificate Modal Logic
+    const certModal = document.getElementById('certModal');
+    const modalContent = document.getElementById('modalContent');
+    const certImage = document.getElementById('certImage');
+    const closeBtn = document.getElementById('closeCertModal');
+    const certItems = document.querySelectorAll('.cert-item');
+
+    const showModal = (certPath) => {
+      if (!certModal || !modalContent || !certImage) return;
+      (certImage as HTMLImageElement).src = certPath;
+      certModal.classList.remove('hidden');
+      setTimeout(() => {
+        certModal.classList.remove('opacity-0');
+        modalContent.classList.remove('scale-95');
+      }, 10);
+      document.body.style.overflow = 'hidden';
+    };
+
+    const hideModal = () => {
+      if (!certModal || !modalContent) return;
+      certModal.classList.add('opacity-0');
+      modalContent.classList.add('scale-95');
+      setTimeout(() => {
+        certModal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }, 300);
+    };
+
+    certItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const certPath = item.getAttribute('data-cert');
+        if (certPath) {
+          showModal(certPath);
+        }
+      });
+    });
+
+    if (certModal && closeBtn) {
+      closeBtn.addEventListener('click', hideModal);
+
+      certModal.addEventListener('click', (e) => {
+        if (e.target === certModal) {
+          hideModal();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !certModal.classList.contains('hidden')) {
+          hideModal();
+        }
+      });
+    }
+  });
+</script>
