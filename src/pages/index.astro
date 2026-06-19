@@ -1,12 +1,12 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import TimelineCard from '../components/TimelineCard.astro';
+import Layout from "../layouts/Layout.astro";
+import TimelineCard from "../components/TimelineCard.astro";
 
 const skills = {
-  "Programming": ["Go", "Java", "Node Js", "Flutter", "React"],
-  "Databases": ["PostgreSQL", "CouchDB", "MongoDB", "Redis"],
+  Programming: ["Go", "Java", "Node Js", "Flutter", "React"],
+  Databases: ["PostgreSQL", "CouchDB", "MongoDB", "Redis"],
   "DevOps & Infrastructure": ["Docker", "Kubernetes", "Grafana", "Jenkins"],
-  "Testing": ["Robot Framework", "Playwright","JMeter"]
+  Testing: ["Robot Framework", "Playwright", "JMeter"],
 };
 ---
 
@@ -14,60 +14,101 @@ const skills = {
   <!-- Subtle background texture (optional, simulated with radial gradients) -->
   <div class="relative w-full overflow-hidden">
     <div
-      class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-wabi-secondary/5 dark:from-tokyo-secondary/10 via-transparent to-transparent"></div>
+      class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-wabi-secondary/5 dark:from-tokyo-secondary/10 via-transparent to-transparent"
+    >
+    </div>
 
     <div class="container mx-auto px-6 py-12 relative z-10">
-
       <!-- Hero Section -->
-      <section id="hero"
-               class="flex flex-col md:flex-row items-center justify-center min-h-[70vh] gap-12 animate-on-scroll">
+      <section
+        id="hero"
+        class="flex flex-col md:flex-row items-center justify-center min-h-[70vh] gap-12 animate-on-scroll"
+      >
         <div class="w-full md:w-1/3 flex justify-center">
           <div class="relative group">
             <!-- Decorative background circle -->
             <div
-              class="absolute -inset-2 bg-gradient-to-tr from-wabi-accent to-wabi-secondary dark:from-tokyo-accent dark:to-tokyo-secondary rounded-full opacity-20 group-hover:opacity-40 transition duration-700 blur"></div>
+              class="absolute -inset-2 bg-gradient-to-tr from-wabi-accent to-wabi-secondary dark:from-tokyo-accent dark:to-tokyo-secondary rounded-full opacity-20 group-hover:opacity-40 transition duration-700 blur"
+            >
+            </div>
             <div
-              class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-2 border-wabi-secondary/20 dark:border-tokyo-secondary/20 shadow-xl dark:shadow-tokyo-accent/10">
-              <img src="/portfolio/image/profile.png" alt="Your Name"
-                   class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+              class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-2 border-wabi-secondary/20 dark:border-tokyo-secondary/20 shadow-xl dark:shadow-tokyo-accent/10"
+            >
+              <img
+                src="/portfolio/image/profile.png"
+                alt="Your Name"
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
             </div>
           </div>
         </div>
         <div class="w-full md:w-2/3 text-center md:text-left space-y-6">
           <h1 class="text-5xl md:text-7xl font-bold tracking-tight">
             こんにちは、
-            <br class="hidden md:block"/>I'm <br class="md:hidden"/>
-            <span class="text-wabi-accent dark:text-tokyo-accent inline-block mt-2 md:mt-0">Mark Poramest</span>
+            <br class="hidden md:block" />I'm <br class="md:hidden" />
+            <span class="text-wabi-accent dark:text-tokyo-accent inline-block mt-2 md:mt-0"
+              >Mark Poramest</span
+            >
           </h1>
           <p
-            class="text-lg md:text-xl text-wabi-secondary dark:text-tokyo-secondary leading-relaxed max-w-2xl mx-auto md:mx-0 font-light">
-            Software Engineer with 5+ years of experience working on microservices and scalable system design. I focus on delivering high-performance, reliable systems with clean code.
+            class="text-lg md:text-xl text-wabi-secondary dark:text-tokyo-secondary leading-relaxed max-w-2xl mx-auto md:mx-0 font-light"
+          >
+            Software Engineer with 5+ years of experience working on microservices and scalable system design.
+            I focus on delivering high-performance, reliable systems with clean code.
           </p>
         </div>
       </section>
 
       <!-- Work Timeline Section -->
-      <section id="work-timeline" class="pb-24 animate-on-scroll">
+      <section id="work-timeline" class="py-16 md:pb-24 animate-on-scroll">
         <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold inline-block relative text-wabi-text dark:text-tokyo-text">
+          <h2
+            class="text-3xl md:text-4xl font-bold inline-block relative text-wabi-text dark:text-tokyo-text"
+          >
             Work Timeline
-            <span class="absolute -bottom-3 left-1/4 w-1/2 h-1 bg-wabi-accent dark:bg-tokyo-accent rounded-full"></span>
+            <span
+              class="absolute -bottom-3 left-1/4 w-1/2 h-1 bg-wabi-accent dark:bg-tokyo-accent rounded-full"
+            ></span>
           </h2>
         </div>
 
-        <div class="max-w-5xl mx-auto mt-20">
-          <div class="relative w-full h-0.5 bg-wabi-secondary/20 dark:bg-tokyo-secondary/20">
-            <div id="timeline-axis"
-                 class="absolute top-0 left-0 h-full bg-wabi-accent dark:bg-tokyo-accent shadow-[0_0_10px_rgba(230,57,70,0.5)] dark:shadow-[0_0_15px_rgba(230,57,70,0.8)]"
-                 style="width: 0%;"></div>
+        <!-- ปรับปรุงโครงสร้างส่วนนี้ให้ยืดหยุ่นขึ้นตามขนาดหน้าจอ -->
+        <div class="max-w-5xl mx-auto mt-10 md:mt-20 px-4 md:px-0">
 
-            <div class="absolute w-full -top-4 flex justify-between px-2 md:px-8">
-              <TimelineCard company="Motif Technology" date="Dec 2021 - Nov 2022" link="/portfolio/work/company_1" delay="0.5s"
-                            location="Bangkok, Thailand"/>
-              <TimelineCard company="Ascend Group" date="Dec 2022 - May 2026" link="/portfolio/work/company_2" delay="1s"
-                            location="Bangkok, Thailand"/>
-              <TimelineCard company="Feedme POS (Remote)" date="Jun 2026 - Present" link="/portfolio/work/company_3" delay="1.5s"
-                            location="Kuala Lumpur, Malaysia"/>
+          <div class="relative w-full flex flex-col items-center gap-12
+                    before:absolute before:top-0 before:bottom-0 before:w-0.5 before:bg-wabi-secondary/20 dark:before:bg-tokyo-secondary/20
+                    md:before:hidden md:block md:h-0.5 md:bg-wabi-secondary/20 md:dark:bg-tokyo-secondary/20">
+
+            <div
+              id="timeline-axis"
+              class="hidden md:block absolute top-0 left-0 h-full bg-wabi-accent dark:bg-tokyo-accent shadow-[0_0_10px_rgba(230,57,70,0.5)] dark:shadow-[0_0_15px_rgba(230,57,70,0.8)]"
+              style="width: 0%;"
+            >
+            </div>
+
+            <div class="w-full flex flex-col items-center gap-8 z-10
+                      md:absolute md:-top-4 md:flex-row md:justify-between md:px-8 md:gap-0">
+              <TimelineCard
+                company="Motif Technology"
+                date="Dec 2021 - Nov 2022"
+                link="/portfolio/work/company_1"
+                delay="0.5s"
+                location="Bangkok, Thailand"
+              />
+              <TimelineCard
+                company="Ascend Group"
+                date="Dec 2022 - May 2026"
+                link="/portfolio/work/company_2"
+                delay="1s"
+                location="Bangkok, Thailand"
+              />
+              <TimelineCard
+                company="Feedme POS (Remote)"
+                date="Jun 2026 - Present"
+                link="/portfolio/work/company_3"
+                delay="1.5s"
+                location="Kuala Lumpur, Malaysia"
+              />
             </div>
           </div>
         </div>
@@ -78,22 +119,36 @@ const skills = {
         <div class="w-full space-y-16">
           <section id="education" class="w-full animate-on-scroll" style="transition-delay: 100ms;">
             <h2
-              class="text-3xl md:text-4xl font-bold mb-10 border-b border-wabi-secondary/20 dark:border-tokyo-secondary/20 pb-4 text-wabi-text dark:text-tokyo-text">
-              Education</h2>
+              class="text-3xl md:text-4xl font-bold mb-10 border-b border-wabi-secondary/20 dark:border-tokyo-secondary/20 pb-4 text-wabi-text dark:text-tokyo-text"
+            >
+              Education
+            </h2>
 
             <div class="space-y-6">
               <div
-                class="group relative bg-wabi-bg dark:bg-tokyo-bg p-6 rounded-r-lg border-l-4 border-wabi-accent dark:border-tokyo-accent shadow-sm hover:shadow-md dark:shadow-none dark:bg-white/5 transition-all duration-300">
+                class="group relative bg-wabi-bg dark:bg-tokyo-bg p-6 rounded-r-lg border-l-4 border-wabi-accent dark:border-tokyo-accent shadow-sm hover:shadow-md dark:shadow-none dark:bg-white/5 transition-all duration-300"
+              >
                 <div class="absolute right-6 top-6 opacity-10 group-hover:opacity-20 transition-opacity">
                   <!-- Decorative icon (Academic Cap) -->
-                  <svg class="w-12 h-12 text-wabi-text dark:text-tokyo-text" fill="currentColor" viewBox="0 0 24 24">
+                  <svg
+                    class="w-12 h-12 text-wabi-text dark:text-tokyo-text"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
                     <path
-                      d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72l5 2.73 5-2.73v3.72z"/>
+                      d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72l5 2.73 5-2.73v3.72z"
+                    ></path>
                   </svg>
                 </div>
-                <h3 class="font-bold text-xl text-wabi-text dark:text-tokyo-text mb-1">B.Sc. in Information Technology</h3>
-                <p class="text-wabi-secondary dark:text-tokyo-secondary font-medium">Cumulative GPA: 3.79 (First Class Honors)</p>
-                <p class="text-wabi-secondary dark:text-tokyo-secondary font-medium">Silpakorn University - Nakhon Pathom, Thailand</p>
+                <h3 class="font-bold text-xl text-wabi-text dark:text-tokyo-text mb-1">
+                  B.Sc. in Information Technology
+                </h3>
+                <p class="text-wabi-secondary dark:text-tokyo-secondary font-medium">
+                  Cumulative GPA: 3.79 (First Class Honors)
+                </p>
+                <p class="text-wabi-secondary dark:text-tokyo-secondary font-medium">
+                  Silpakorn University - Nakhon Pathom, Thailand
+                </p>
                 <p class="text-sm text-wabi-secondary/70 dark:text-tokyo-secondary/70 mt-2">2017 - 2021</p>
               </div>
             </div>
@@ -102,27 +157,39 @@ const skills = {
           <!-- Moved Linguistics here -->
           <section id="education" class="w-full animate-on-scroll" style="transition-delay: 100ms;">
             <h2
-              class="text-3xl md:text-4xl font-bold mb-10 border-b border-wabi-secondary/20 dark:border-tokyo-secondary/20 pb-4 text-wabi-text dark:text-tokyo-text">
+              class="text-3xl md:text-4xl font-bold mb-10 border-b border-wabi-secondary/20 dark:border-tokyo-secondary/20 pb-4 text-wabi-text dark:text-tokyo-text"
+            >
               Languages
             </h2>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div
-                class="flex items-center justify-between p-4 rounded-lg bg-wabi-secondary/5 dark:bg-tokyo-secondary/5 border border-wabi-secondary/10 dark:border-tokyo-secondary/10">
+                class="flex items-center justify-between p-4 rounded-lg bg-wabi-secondary/5 dark:bg-tokyo-secondary/5 border border-wabi-secondary/10 dark:border-tokyo-secondary/10"
+              >
                 <span class="font-semibold text-wabi-text dark:text-tokyo-text">Thai</span>
                 <span
-                  class="text-xs font-bold px-2 py-1 bg-wabi-accent text-white dark:bg-tokyo-accent rounded shadow-sm">Native</span>
+                  class="text-xs font-bold px-2 py-1 bg-wabi-accent text-white dark:bg-tokyo-accent rounded shadow-sm"
+                  >Native</span
+                >
               </div>
-              <div data-cert="/portfolio/cert/jlpt-n2.jpg"
-                class="cert-item flex items-center justify-between p-4 rounded-lg bg-wabi-secondary/5 dark:bg-tokyo-secondary/5 border border-wabi-secondary/10 dark:border-tokyo-secondary/10 hover:border-wabi-accent dark:hover:border-tokyo-accent hover:text-wabi-accent dark:hover:text-tokyo-accent hover:bg-wabi-accent/10 dark:hover:bg-tokyo-accent/10 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md transform hover:-translate-y-0.5">
+              <div
+                data-cert="/portfolio/cert/jlpt-n2.jpg"
+                class="cert-item flex items-center justify-between p-4 rounded-lg bg-wabi-secondary/5 dark:bg-tokyo-secondary/5 border border-wabi-secondary/10 dark:border-tokyo-secondary/10 hover:border-wabi-accent dark:hover:border-tokyo-accent hover:text-wabi-accent dark:hover:text-tokyo-accent hover:bg-wabi-accent/10 dark:hover:bg-tokyo-accent/10 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
+              >
                 <span class="font-semibold text-wabi-text dark:text-tokyo-text">Japanese</span>
                 <span
-                  class="text-xs font-bold px-2 py-1 bg-wabi-accent text-white dark:bg-tokyo-accent rounded shadow-sm">JLPT N2</span>
+                  class="text-xs font-bold px-2 py-1 bg-wabi-accent text-white dark:bg-tokyo-accent rounded shadow-sm"
+                  >JLPT N2</span
+                >
               </div>
-              <div data-cert="/portfolio/cert/cefr.jpg"
-                class="cert-item flex items-center justify-between p-4 rounded-lg bg-wabi-secondary/5 dark:bg-tokyo-secondary/5 border border-wabi-secondary/10 dark:border-tokyo-secondary/10 hover:border-wabi-accent dark:hover:border-tokyo-accent hover:text-wabi-accent dark:hover:text-tokyo-accent hover:bg-wabi-accent/10 dark:hover:bg-tokyo-accent/10 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md transform hover:-translate-y-0.5">
+              <div
+                data-cert="/portfolio/cert/cefr.jpg"
+                class="cert-item flex items-center justify-between p-4 rounded-lg bg-wabi-secondary/5 dark:bg-tokyo-secondary/5 border border-wabi-secondary/10 dark:border-tokyo-secondary/10 hover:border-wabi-accent dark:hover:border-tokyo-accent hover:text-wabi-accent dark:hover:text-tokyo-accent hover:bg-wabi-accent/10 dark:hover:bg-tokyo-accent/10 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
+              >
                 <span class="font-semibold text-wabi-text dark:text-tokyo-text">English</span>
                 <span
-                  class="text-xs font-bold px-2 py-1 bg-wabi-accent text-white dark:bg-tokyo-accent rounded shadow-sm">CEFR C1</span>
+                  class="text-xs font-bold px-2 py-1 bg-wabi-accent text-white dark:bg-tokyo-accent rounded shadow-sm"
+                  >CEFR C1</span
+                >
               </div>
             </div>
           </section>
@@ -131,104 +198,123 @@ const skills = {
         <!-- Skills Section -->
         <section id="skills" class="w-full animate-on-scroll" style="transition-delay: 300ms;">
           <h2
-            class="text-3xl md:text-4xl font-bold mb-10 border-b border-wabi-secondary/20 dark:border-tokyo-secondary/20 pb-4 text-wabi-text dark:text-tokyo-text">
-            Expertise</h2>
+            class="text-3xl md:text-4xl font-bold mb-10 border-b border-wabi-secondary/20 dark:border-tokyo-secondary/20 pb-4 text-wabi-text dark:text-tokyo-text"
+          >
+            Expertise
+          </h2>
 
           <div class="space-y-8">
-            {Object.entries(skills).map(([category, skillList]) => (
-              <div>
-                <h3 class="text-xl font-medium mb-4 text-wabi-text dark:text-tokyo-text flex items-center gap-2">
-                  {category}
-                </h3>
-                <div class="flex flex-wrap gap-3">
-                  {skillList.map((skill) => (
-                    <span
-                      class="px-4 py-2 text-sm font-medium rounded-full bg-wabi-secondary/10 text-wabi-text dark:bg-tokyo-secondary/10 dark:text-tokyo-text border border-wabi-secondary/20 dark:border-tokyo-secondary/20 hover:border-wabi-accent dark:hover:border-tokyo-accent hover:text-wabi-accent dark:hover:text-tokyo-accent hover:bg-wabi-accent/10 dark:hover:bg-tokyo-accent/10 transition-all duration-300 cursor-default shadow-sm hover:shadow-md transform hover:-translate-y-0.5">
-                      {skill}
-                    </span>
-                  ))}
+            {
+              Object.entries(skills).map(([category, skillList]) => (
+                <div>
+                  <h3 class="text-xl font-medium mb-4 text-wabi-text dark:text-tokyo-text flex items-center gap-2">
+                    {category}
+                  </h3>
+                  <div class="flex flex-wrap gap-3">
+                    {skillList.map((skill) => (
+                      <span class="px-4 py-2 text-sm font-medium rounded-full bg-wabi-secondary/10 text-wabi-text dark:bg-tokyo-secondary/10 dark:text-tokyo-text border border-wabi-secondary/20 dark:border-tokyo-secondary/20 hover:border-wabi-accent dark:hover:border-tokyo-accent hover:text-wabi-accent dark:hover:text-tokyo-accent hover:bg-wabi-accent/10 dark:hover:bg-tokyo-accent/10 transition-all duration-300 cursor-default shadow-sm hover:shadow-md transform hover:-translate-y-0.5">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            }
           </div>
         </section>
       </div>
-
     </div>
   </div>
 
   <!-- Certificate Modal -->
-  <div id="certModal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-black/70 backdrop-blur-sm transition-opacity duration-300 opacity-0">
-    <div id="modalContent" class="bg-wabi-bg dark:bg-tokyo-bg rounded-2xl shadow-2xl w-full max-w-3xl mx-4 p-4 relative transform scale-95 transition-all duration-300">
-      <button id="closeCertModal" class="absolute -top-4 -right-4 w-10 h-10 bg-wabi-accent text-wabi-bg rounded-full flex items-center justify-center shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-wabi-accent hover:opacity-90 z-10">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+  <div
+    id="certModal"
+    class="fixed inset-0 z-50 flex items-center justify-center hidden bg-black/70 backdrop-blur-sm transition-opacity duration-300 opacity-0"
+  >
+    <div
+      id="modalContent"
+      class="bg-wabi-bg dark:bg-tokyo-bg rounded-2xl shadow-2xl w-full max-w-3xl mx-4 p-4 relative transform scale-95 transition-all duration-300"
+    >
+      <button
+        id="closeCertModal"
+        class="absolute -top-4 -right-4 w-10 h-10 bg-wabi-accent text-wabi-bg rounded-full flex items-center justify-center shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-wabi-accent hover:opacity-90 z-10"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+          ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"
+          ></path></svg
+        >
       </button>
-      <div class="w-full h-full min-h-[400px] flex items-center justify-center bg-wabi-secondary/10 dark:bg-tokyo-secondary/10 rounded-lg overflow-hidden">
-         <img id="certImage" src="" alt="Certificate" class="max-w-full max-h-[80vh] object-contain">
+      <div
+        class="w-full h-full min-h-[400px] flex items-center justify-center bg-wabi-secondary/10 dark:bg-tokyo-secondary/10 rounded-lg overflow-hidden"
+      >
+        <img id="certImage" src="" alt="Certificate" class="max-w-full max-h-[80vh] object-contain" />
       </div>
     </div>
   </div>
 </Layout>
 
 <script>
-  document.addEventListener('astro:page-load', () => {
+  document.addEventListener("astro:page-load", () => {
     // Timeline animation
-    const timelineObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const axis = document.getElementById('timeline-axis');
-          if (axis) {
-            axis.style.width = '100%';
-            axis.classList.add('animate-unfold');
+    const timelineObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const axis = document.getElementById("timeline-axis");
+            if (axis) {
+              axis.style.width = "100%";
+              axis.classList.add("animate-unfold");
+            }
+
+            const cards = document.querySelectorAll(".timeline-card");
+            cards.forEach((card, index) => {
+              (card as HTMLElement).style.animationDelay = `${0.5 + index * 0.3}s`;
+              card.classList.add("animate-fade-slide-up");
+            });
+
+            timelineObserver.unobserve(entry.target);
           }
+        });
+      },
+      { threshold: 0.3 },
+    );
 
-          const cards = document.querySelectorAll('.timeline-card');
-          cards.forEach((card, index) => {
-            (card as HTMLElement).style.animationDelay = `${0.5 + (index * 0.3)}s`;
-            card.classList.add('animate-fade-slide-up');
-          });
-
-          timelineObserver.unobserve(entry.target);
-        }
-      });
-    }, {threshold: 0.3});
-
-    const timelineSection = document.getElementById('work-timeline');
+    const timelineSection = document.getElementById("work-timeline");
     if (timelineSection) {
       timelineObserver.observe(timelineSection);
     }
 
     // Certificate Modal Logic
-    const certModal = document.getElementById('certModal');
-    const modalContent = document.getElementById('modalContent');
-    const certImage = document.getElementById('certImage');
-    const closeBtn = document.getElementById('closeCertModal');
-    const certItems = document.querySelectorAll('.cert-item');
+    const certModal = document.getElementById("certModal");
+    const modalContent = document.getElementById("modalContent");
+    const certImage = document.getElementById("certImage");
+    const closeBtn = document.getElementById("closeCertModal");
+    const certItems = document.querySelectorAll(".cert-item");
 
     const showModal = (certPath) => {
       if (!certModal || !modalContent || !certImage) return;
       (certImage as HTMLImageElement).src = certPath;
-      certModal.classList.remove('hidden');
+      certModal.classList.remove("hidden");
       setTimeout(() => {
-        certModal.classList.remove('opacity-0');
-        modalContent.classList.remove('scale-95');
+        certModal.classList.remove("opacity-0");
+        modalContent.classList.remove("scale-95");
       }, 10);
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     };
 
     const hideModal = () => {
       if (!certModal || !modalContent) return;
-      certModal.classList.add('opacity-0');
-      modalContent.classList.add('scale-95');
+      certModal.classList.add("opacity-0");
+      modalContent.classList.add("scale-95");
       setTimeout(() => {
-        certModal.classList.add('hidden');
-        document.body.style.overflow = '';
+        certModal.classList.add("hidden");
+        document.body.style.overflow = "";
       }, 300);
     };
 
-    certItems.forEach(item => {
-      item.addEventListener('click', () => {
-        const certPath = item.getAttribute('data-cert');
+    certItems.forEach((item) => {
+      item.addEventListener("click", () => {
+        const certPath = item.getAttribute("data-cert");
         if (certPath) {
           showModal(certPath);
         }
@@ -236,16 +322,16 @@ const skills = {
     });
 
     if (certModal && closeBtn) {
-      closeBtn.addEventListener('click', hideModal);
+      closeBtn.addEventListener("click", hideModal);
 
-      certModal.addEventListener('click', (e) => {
+      certModal.addEventListener("click", (e) => {
         if (e.target === certModal) {
           hideModal();
         }
       });
 
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !certModal.classList.contains('hidden')) {
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && !certModal.classList.contains("hidden")) {
           hideModal();
         }
       });

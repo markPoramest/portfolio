@@ -6,7 +6,7 @@ tags: ["Golang", "Node js.", "Redis", "PostgreSQL", "Keycloak", "JMeter", "Robot
 image: "/image/ascend-logo.jpg"
 ---
 
-**_Senior Software Engineer (Jan 2024 - Present)_**
+**_Senior Software Engineer (Jan 2024 - May 2026)_**
 
 **_Software Engineer (Dec 2021 - Dec 2023)_**
 
