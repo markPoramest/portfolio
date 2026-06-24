@@ -8,7 +8,7 @@ image: "/image/feedme-logo.jpg"
 
 **_Senior Software Engineer (Jun 2026 - Present)_**
 
-- Develop POS applications using Flutter and Vue for the frontend, and Node.js and Golang for the backend.
+- Develop POS applications using Flutter and Vue for the frontend, Node.js and Golang for the backend, while using GitHub Copilot and Claude to speed up development.
   <br></br>
 - Collaborate closely with the Malaysian engineering team, using English as the primary language to communicate and work together.
   <br></br>
