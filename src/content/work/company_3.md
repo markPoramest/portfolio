@@ -2,7 +2,7 @@
 title: "Senior Software Engineer"
 date: "Jun 2026 - Present"
 description: "Develop, and scale the core POS application to support the Thailand market."
-tags: ["Golang", "Node js.", "Flutter", "MongoDB", "CouchDB"]
+tags: ["Golang", "Node js.", "Flutter", "MongoDB", "CouchDB", "AI"]
 image: "/image/feedme-logo.jpg"
 ---
 
