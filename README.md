@@ -4,45 +4,10 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.19-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![pnpm](https://img.shields.io/badge/pnpm-11.24-F69220?style=flat-square&logo=pnpm&logoColor=white)](https://pnpm.io/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
 
 A modern, fast personal portfolio website built with **Astro 7** and **Tailwind CSS**, designed with an aesthetic inspired by Japanese travel, minimalism, and craftsmanship.
 
 🌐 **Live Demo:** [https://markporamest.github.io/portfolio](https://markporamest.github.io/portfolio)
-
----
-
-## 🎨 Design System (Japan Trip Theme)
-
-The design system incorporates the **Japan Trip Travel** palette, balancing warm earthy tones with sleek modern contrast.
-
-### 🌙 Dark Mode (Eerie Black & Charcoal Base)
-
-| Token | Hex / Value | Description |
-| :--- | :--- | :--- |
-| `--bg-base` | `#252422` | Main page background (Eerie Black) |
-| `--bg-surface` | `#2e2c29` | Elevated containers & navigation bars |
-| `--bg-card` | `#403D39` | Card and panel backgrounds (Charcoal) |
-| `--bg-elevated` | `#4e4b45` | Hovered and floating elements |
-| `--border-default` | `#54504a` | Primary card and section borders |
-| `--text-primary` | `#FFFCF2` | High-contrast body & heading text |
-| `--text-secondary` | `#CCC5B9` | Subtitles, labels, and secondary copy |
-| `--accent` | `#EB5E28` | Primary brand accent (Flame Orange) |
-| `--accent-light` | `#f2794b` | Accent hover & highlight states |
-
-### ☀️ Light Mode (Floral White & Crisp Cards)
-
-| Token | Hex / Value | Description |
-| :--- | :--- | :--- |
-| `--bg-base` | `#FFFCF2` | Main page background (Floral White) |
-| `--bg-surface` | `#f5efe4` | Warm secondary containers |
-| `--bg-card` | `#ffffff` | Crisp white cards and interactive panels |
-| `--bg-elevated` | `#ede5d6` | Elevated badges and button states |
-| `--border-default` | `#dcd4c6` | Subtle natural borders |
-| `--text-primary` | `#252422` | Deep charcoal primary typography |
-| `--text-secondary` | `#403D39` | Secondary text & descriptions |
-| `--accent` | `#EB5E28` | Primary brand accent (Flame Orange) |
-| `--accent-light` | `#f2794b` | Accent hover & highlight states |
 
 ---
 
@@ -149,9 +114,3 @@ Visit `http://localhost:4321` in your browser.
 | `pnpm preview` | Locally serves the built production site from `./dist/` |
 | `pnpm audit` | Checks dependencies for vulnerabilities |
 | `pnpm deploy` | Deploys static build to GitHub Pages (`gh-pages -d dist`) |
-
----
-
-## 📄 License
-
-Distributed under the [MIT License](LICENSE).
