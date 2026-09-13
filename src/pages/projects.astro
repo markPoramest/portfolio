@@ -1,0 +1,163 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const projects = [
+  {
+    title: "Japan Trip Planner",
+    subtitle: "By Mark no Nihon Tabi",
+    url: "https://japantripplanner.vercel.app/",
+    description:
+      "An interactive travel planning web application built specifically for traveling in Japan. Helps users organize detailed day-by-day itineraries, estimate travel costs, and keep track of IC card (Suica/Pasmo) transit balances.",
+    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Travel Tech"],
+    features: [
+      "Interactive daily itinerary management with route scheduling",
+      "IC card transit balance & travel expense tracking",
+      "Comprehensive trip budget and cost calculator",
+      "Responsive UI with dark and light mode support"
+    ],
+    highlight: "Travel Utility",
+    kanjiWatermark: "旅",
+    icon: `<svg class="w-8 h-8 text-wabi-accent dark:text-tokyo-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`
+  },
+  {
+    title: "Map Animation Generator",
+    subtitle: "3D Route Travel Video Creator",
+    url: "https://map-animation-generator.vercel.app/",
+    description:
+      "A specialized 3D map route animation tool that generates travel videos between departure and destination points. Features customizable vehicle types, realistic train models, travel time badges, and export-ready video rendering.",
+    tags: ["Next.js", "React", "TypeScript", "3D Animation", "Canvas / WebGL", "Tailwind CSS"],
+    features: [
+      "Dynamic 3D map route animation generator from start to finish",
+      "Multiple transport modes: Shinkansen, Local Train, Car, Flight, Bus, Bicycle & Walk",
+      "1-click route presets (e.g. Tokaido Shinkansen, Chuo Line)",
+      "Interactive timeline scrubber and 16:9 YouTube video export"
+    ],
+    highlight: "Creative Tool",
+    kanjiWatermark: "創",
+    icon: `<svg class="w-8 h-8 text-wabi-accent dark:text-tokyo-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>`
+  }
+];
+---
+
+<Layout title="Projects | Mark Poramest">
+  <!-- Subtle background texture -->
+  <div class="relative w-full min-h-screen overflow-hidden">
+    <div
+      class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-wabi-secondary/5 dark:from-tokyo-secondary/10 via-transparent to-transparent"
+    >
+    </div>
+
+    <div class="container mx-auto px-6 py-24 relative z-10">
+      <!-- Header Section -->
+      <div class="text-center mb-20 animate-on-scroll">
+        <h1 class="text-5xl font-bold text-wabi-text dark:text-tokyo-text inline-block relative">
+          Featured Projects
+          <span
+            class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-24 h-1 bg-wabi-accent dark:bg-tokyo-accent rounded-full"
+          ></span>
+        </h1>
+        <p class="mt-8 text-wabi-secondary dark:text-tokyo-secondary max-w-2xl mx-auto text-lg leading-relaxed">
+          Interactive web applications and creative tools I've developed, combining modern engineering with practical travel and visualization solutions.
+        </p>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="max-w-5xl mx-auto space-y-12">
+        {
+          projects.map((project, index) => (
+            <div
+              class="group relative bg-wabi-bg dark:bg-tokyo-bg border border-wabi-secondary/20 dark:border-tokyo-secondary/20 rounded-2xl p-8 md:p-10 shadow-lg hover:shadow-2xl hover:border-wabi-accent dark:hover:border-tokyo-accent transition-all duration-300 animate-on-scroll overflow-hidden"
+              style={`transition-delay: ${index * 150}ms;`}
+            >
+              <!-- Decorative Japanese Kanji Watermark -->
+              <div class="absolute -right-6 -bottom-8 text-9xl font-serif text-wabi-secondary/5 dark:text-tokyo-secondary/5 group-hover:text-wabi-accent/10 dark:group-hover:text-tokyo-accent/10 transition-colors duration-500 pointer-events-none select-none">
+                {project.kanjiWatermark}
+              </div>
+
+              <!-- Top Row: Category Badge & External Link Icon -->
+              <div class="flex items-center justify-between gap-4 mb-6 relative z-10">
+                <div class="flex items-center gap-3">
+                  <div class="p-2.5 rounded-xl bg-wabi-secondary/5 dark:bg-tokyo-secondary/10 border border-wabi-secondary/10 dark:border-tokyo-secondary/20">
+                    <Fragment set:html={project.icon} />
+                  </div>
+                  <div>
+                    <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-wabi-accent/10 text-wabi-accent dark:bg-tokyo-accent/20 dark:text-tokyo-accent">
+                      {project.highlight}
+                    </span>
+                    <p class="text-xs text-wabi-secondary/80 dark:text-tokyo-secondary/80 font-medium mt-1">
+                      {project.subtitle}
+                    </p>
+                  </div>
+                </div>
+
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-lg bg-wabi-secondary/10 text-wabi-text dark:bg-tokyo-secondary/10 dark:text-tokyo-text hover:bg-wabi-accent hover:text-wabi-bg dark:hover:bg-tokyo-accent dark:hover:text-tokyo-bg transition-colors"
+                >
+                  <span>Visit Live App</span>
+                  <svg class="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </div>
+
+              <!-- Project Title & Description -->
+              <div class="relative z-10 mb-6">
+                <h2 class="text-2xl md:text-3xl font-bold text-wabi-text dark:text-tokyo-text group-hover:text-wabi-accent dark:group-hover:text-tokyo-accent transition-colors">
+                  <a href={project.url} target="_blank" rel="noopener noreferrer" class="hover:underline flex items-center gap-2">
+                    {project.title}
+                  </a>
+                </h2>
+                <p class="mt-3 text-wabi-secondary dark:text-tokyo-secondary leading-relaxed text-base md:text-lg">
+                  {project.description}
+                </p>
+              </div>
+
+              <!-- Feature Highlights -->
+              <div class="relative z-10 mb-6 bg-wabi-secondary/5 dark:bg-tokyo-secondary/5 border border-wabi-secondary/10 dark:border-tokyo-secondary/10 rounded-xl p-5">
+                <h3 class="text-sm font-bold uppercase tracking-wider text-wabi-text dark:text-tokyo-text mb-3">
+                  Key Features
+                </h3>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-2.5">
+                  {project.features.map((feature) => (
+                    <li class="flex items-start gap-2.5 text-sm text-wabi-secondary dark:text-tokyo-secondary">
+                      <svg class="w-4 h-4 text-wabi-accent dark:text-tokyo-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <!-- Tech Stack Tags & Action Button -->
+              <div class="relative z-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-4 border-t border-wabi-secondary/15 dark:border-tokyo-secondary/15">
+                <div class="flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <span class="px-3 py-1 text-xs font-medium rounded-md bg-wabi-secondary/10 text-wabi-secondary dark:bg-tokyo-secondary/10 dark:text-tokyo-secondary border border-wabi-secondary/15 dark:border-tokyo-secondary/15">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-wabi-accent text-wabi-bg dark:bg-tokyo-accent dark:text-tokyo-bg font-bold text-sm hover:opacity-90 transition-all shadow-md group/btn w-full sm:w-auto"
+                >
+                  <span>Open Application</span>
+                  <svg class="w-4 h-4 transform group-hover/btn:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</Layout>

@@ -5,18 +5,53 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Japan Trip Travel Theme Colors
         wabi: {
-          bg: '#FAF6F0',
-          text: '#1C1C1C',
-          accent: '#9E2A2B',
-          secondary: '#4A5568',
+          bg: '#FFFCF2',        // Floral White (--bg-base)
+          surface: '#f5efe4',   // Warm surface (--bg-surface)
+          card: '#ffffff',      // Pure card (--bg-card)
+          elevated: '#ede5d6',  // Elevated element (--bg-elevated)
+          text: '#252422',      // Eerie Black (--text-primary)
+          secondary: '#736d65', // Muted text (--text-muted)
+          muted: '#403D39',     // Charcoal (--text-secondary)
+          accent: '#EB5E28',    // Flame Orange (--accent)
+          'accent-light': '#f2794b',
+          border: '#dcd4c6',    // Border default (--border-default)
         },
         tokyo: {
-          bg: '#121212',
-          text: '#FAF6F0',
-          accent: '#E63946',
-          secondary: '#A0AEC0',
+          bg: '#252422',        // Eerie Black (--bg-base)
+          surface: '#2e2c29',   // Dark surface (--bg-surface)
+          card: '#403D39',      // Charcoal card (--bg-card)
+          elevated: '#4e4b45',  // Elevated element (--bg-elevated)
+          text: '#FFFCF2',      // Floral White (--text-primary)
+          secondary: '#CCC5B9', // Pale Silver (--text-secondary)
+          muted: '#a8a196',     // Muted text (--text-muted)
+          accent: '#EB5E28',    // Flame Orange (--accent)
+          'accent-light': '#f2794b',
+          border: '#54504a',    // Border default (--border-default)
         },
+        // Direct CSS variable-based aliases
+        'bg-base': 'var(--bg-base)',
+        'bg-surface': 'var(--bg-surface)',
+        'bg-card': 'var(--bg-card)',
+        'bg-elevated': 'var(--bg-elevated)',
+        'border-default': 'var(--border-default)',
+        'border-muted': 'var(--border-muted)',
+        'border-subtle': 'var(--border-subtle)',
+        'text-primary': 'var(--text-primary)',
+        'text-secondary': 'var(--text-secondary)',
+        'text-muted': 'var(--text-muted)',
+        'text-faint': 'var(--text-faint)',
+        accent: {
+          DEFAULT: 'var(--accent)',
+          light: 'var(--accent-light)',
+          muted: 'var(--accent-muted-bg)',
+          subtle: 'var(--accent-subtle-bg)',
+        },
+      },
+      boxShadow: {
+        earth: 'var(--shadow-earth)',
+        card: 'var(--shadow-card)',
       },
       fontFamily: {
         sans: ['"Quicksand"', 'system-ui', 'sans-serif'],

@@ -4,6 +4,7 @@ import ThemeToggle from "./ThemeToggle.astro";
 const navLinks = [
   { href: "/portfolio", text: "Home" },
   { href: "/portfolio/work", text: "Work" },
+  { href: "/portfolio/projects", text: "Projects" },
   { href: "/portfolio/skill", text: "Skills" },
   { href: "/portfolio/passions", text: "Passions" },
   { href: "/portfolio/contact", text: "Contact" },
@@ -95,20 +96,19 @@ const navLinks = [
     const currentPath = window.location.pathname;
 
     // Active link styling
-    // Active link styling
-    const setActiveLink = (links) => {
+    const setActiveLink = (links: NodeListOf<Element>) => {
       links.forEach((link) => {
         link.classList.remove("is-active");
 
         const linkPath = link.getAttribute("href");
         const cleanCurrent = currentPath.replace(/\/$/, "");
-        const cleanLink = linkPath.replace(/\/$/, "");
+        const cleanLink = linkPath ? linkPath.replace(/\/$/, "") : "";
 
         let isActive = false;
 
         if (cleanLink === "/portfolio") {
           isActive = cleanCurrent === "/portfolio";
-        } else {
+        } else if (linkPath) {
           isActive = cleanCurrent === cleanLink || currentPath.startsWith(linkPath);
         }
 
@@ -131,11 +131,12 @@ const navLinks = [
 
     // Close mobile menu when clicking a link or outside
     document.addEventListener("click", (e) => {
-      if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
-        if (!mobileMenu.contains(e.target) && e.target !== mobileMenuButton) {
+      const target = e.target as HTMLElement | null;
+      if (mobileMenu && !mobileMenu.classList.contains("hidden") && target) {
+        if (!mobileMenu.contains(target) && target !== mobileMenuButton && !mobileMenuButton?.contains(target)) {
           mobileMenu.classList.add("hidden");
         }
-        if (e.target.classList.contains("nav-link-mobile")) {
+        if (target.classList.contains("nav-link-mobile")) {
           mobileMenu.classList.add("hidden");
         }
       }
