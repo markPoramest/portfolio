@@ -10,6 +10,7 @@ image: "/image/feedme-logo.jpg"
 
 - Develop POS applications using Flutter and Vue for the frontend, Node.js and Golang for the backend, while
   using GitHub Copilot and Claude to speed up development. <br></br>
-- Build internal tools using AI skill plugins to support and assist the Thailand team. <br></br>
+- Build AI skills and MCP tools to support the Thailand team with the onboarding process. <br></br>
+- Integrate the POS system with third-party delivery platforms in Thailand.  <br></br>
 - Collaborate closely with the Malaysian engineering team, using English as the primary language to
   communicate and work together.
