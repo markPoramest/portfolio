@@ -1,14 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-// Data for visited prefectures, grouped by region
-const visitedPrefecturesByRegion = {
-  "Kanto": ["Tokyo", "Kanagawa", "Saitama", "Chiba", "Ibaraki", "Tochigi", "Gunma"],
-  "Chubu": ["Aichi", "Gifu", "Shizuoka", "Yamanashi", "Nagano", "Niigata", "Toyama", "Ishikawa", "Fukui"],
-  "Kansai": ["Osaka", "Kyoto", "Hyogo", "Nara", "Wakayama"],
-  "Chugoku": ["Hiroshima", "Okayama", "Yamaguchi"],
-  "Kyushu": ["Fukuoka", "Saga", "Nagasaki", "Kumamoto", "Oita"]
-};
+import JapanMap from '../components/JapanMap.astro';
 
 const jpopArtists = ["Yuuri", "Mrs. GREEN APPLE", "Back Number", "Official Hige Dandism"];
 const animeList = ["Kimetsu no Yaiba", "Jujutsu Kaisen", "Attack on Titan", "DAN DA DAN"];
@@ -104,34 +96,22 @@ const profileCarouselImages = [
           </div>
         </div>
 
-        <!-- Travel Footprint -->
-        <div class="lg:col-span-3 group relative bg-wabi-bg dark:bg-tokyo-bg p-8 rounded-2xl border border-wabi-secondary/20 dark:border-tokyo-secondary/20 shadow-lg flex flex-col justify-center text-left animate-on-scroll" style="transition-delay: 200ms;">
-          <div class="flex items-center gap-4 mb-6">
-            <div class="w-16 h-16 bg-wabi-accent/10 dark:bg-tokyo-accent/10 text-wabi-accent dark:text-tokyo-accent rounded-full flex items-center justify-center text-3xl font-black shadow-inner border border-wabi-accent/20 dark:border-tokyo-accent/20">
-              10
+        <!-- Travel Footprint: Interactive Japan Map -->
+        <div class="lg:col-span-3 group relative bg-wabi-bg dark:bg-tokyo-bg p-6 sm:p-10 rounded-3xl border border-wabi-secondary/20 dark:border-tokyo-secondary/20 shadow-lg flex flex-col justify-center text-left animate-on-scroll" style="transition-delay: 200ms;">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-14 h-14 bg-wabi-accent/10 dark:bg-tokyo-accent/10 text-wabi-accent dark:text-tokyo-accent rounded-2xl flex items-center justify-center text-2xl font-black shadow-inner border border-wabi-accent/20 dark:border-tokyo-accent/20">
+              🗾
             </div>
-            <h2 class="text-3xl font-bold text-wabi-text dark:text-tokyo-text">Trips to Japan</h2>
+            <div>
+              <h2 class="text-3xl font-bold text-wabi-text dark:text-tokyo-text">Travel Footprint</h2>
+              <p class="text-sm font-medium text-wabi-accent dark:text-tokyo-accent">Interactive Prefecture Map of Japan</p>
+            </div>
           </div>
           <p class="text-wabi-secondary dark:text-tokyo-secondary text-lg mb-8 leading-relaxed max-w-3xl">
-            My travels have taken me through <strong class="text-wabi-accent dark:text-tokyo-accent font-bold">29 of 47</strong> prefectures. Below are the regions I've explored.
+            My love for exploring Japan has taken me through <strong class="text-wabi-accent dark:text-tokyo-accent font-bold">29 of 47 prefectures</strong> across Honshu and Kyushu. Explore the interactive map below to view the regions and provinces I've visited.
           </p>
 
-          <!-- Equal Column Grid for Regions -->
-          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 w-full">
-            {Object.entries(visitedPrefecturesByRegion).map(([region, prefs]) => (
-              <div class="flex flex-col">
-                <h4 class="text-lg font-bold text-wabi-text dark:text-tokyo-text border-b-2 border-wabi-accent/20 dark:border-tokyo-accent/20 pb-2 mb-4 w-full">{region}</h4>
-                <ul class="flex flex-col space-y-2">
-                  {prefs.map(pref => (
-                    <li class="flex items-center gap-2 text-wabi-secondary dark:text-tokyo-secondary">
-                      <svg class="w-4 h-4 text-wabi-accent dark:text-tokyo-accent shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
-                      {pref}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
+          <JapanMap />
         </div>
 
         <!-- Mark no Nihon Tabi -->

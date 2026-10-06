@@ -1,0 +1,526 @@
+---
+import {
+  prefecturesList,
+  visitedPrefectureNames
+} from '../data/japanPrefectures';
+
+// Calculate visited stats
+const visitedSet = new Set(visitedPrefectureNames);
+const totalPrefectures = prefecturesList.length; // 47
+const visitedCount = visitedPrefectureNames.length; // 29
+const visitedPercentage = Math.round((visitedCount / totalPrefectures) * 100);
+
+// Group prefectures by region for regional stats and breakdowns
+const regionsSummary = [
+  { name: 'Kanto', nameJa: '関東', total: 7, visited: 7 },
+  { name: 'Chubu', nameJa: '中部', total: 9, visited: 9 },
+  { name: 'Kansai', nameJa: '関西', total: 7, visited: 5 },
+  { name: 'Chugoku', nameJa: '中国', total: 5, visited: 3 },
+  { name: 'Kyushu', nameJa: '九州', total: 8, visited: 5 }, // including Okinawa
+  { name: 'Tohoku', nameJa: '東北', total: 6, visited: 0 },
+  { name: 'Shikoku', nameJa: '四国', total: 4, visited: 0 },
+  { name: 'Hokkaido', nameJa: '北海道', total: 1, visited: 0 },
+];
+
+const regionOrder = ["Kanto", "Chubu", "Kansai", "Chugoku", "Kyushu", "Tohoku", "Shikoku", "Hokkaido"];
+
+const allRegionsWithPrefectures = regionOrder.map(rName => {
+  const prefs = prefecturesList.filter(p => {
+    if (rName === 'Kyushu') {
+      return p.region === 'Kyushu' || p.region === 'Okinawa';
+    }
+    return p.region === rName;
+  });
+  const visitedInRegion = prefs.filter(p => visitedSet.has(p.romaji)).length;
+  const regSummary = regionsSummary.find(r => r.name === rName);
+  return {
+    name: rName,
+    nameJa: regSummary?.nameJa || '',
+    total: prefs.length,
+    visited: visitedInRegion,
+    prefectures: prefs
+  };
+});
+---
+
+<div class="w-full flex flex-col space-y-8" id="japan-map-container">
+  <!-- Key Stats Header (2 Balanced Highlight Cards) -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <div class="bg-wabi-surface/80 dark:bg-tokyo-surface/80 p-6 rounded-2xl border border-wabi-secondary/20 dark:border-tokyo-secondary/20 shadow-sm flex items-center gap-5">
+      <div class="w-14 h-14 rounded-2xl bg-wabi-accent/10 dark:bg-tokyo-accent/15 flex items-center justify-center text-wabi-accent dark:text-tokyo-accent text-2xl font-black shrink-0 border border-wabi-accent/20 dark:border-tokyo-accent/30 shadow-inner">
+        10
+      </div>
+      <div>
+        <p class="text-xs uppercase tracking-wider text-wabi-secondary dark:text-tokyo-secondary font-semibold">Journeys</p>
+        <h3 class="text-xl md:text-2xl font-bold text-wabi-text dark:text-tokyo-text">Trips to Japan</h3>
+      </div>
+    </div>
+
+    <div class="bg-wabi-surface/80 dark:bg-tokyo-surface/80 p-6 rounded-2xl border border-wabi-secondary/20 dark:border-tokyo-secondary/20 shadow-sm flex items-center gap-5">
+      <div class="w-14 h-14 rounded-2xl bg-wabi-accent/10 dark:bg-tokyo-accent/15 flex items-center justify-center text-wabi-accent dark:text-tokyo-accent text-xl font-black shrink-0 border border-wabi-accent/20 dark:border-tokyo-accent/30 shadow-inner">
+        {visitedCount}
+      </div>
+      <div>
+        <p class="text-xs uppercase tracking-wider text-wabi-secondary dark:text-tokyo-secondary font-semibold">Coverage ({visitedPercentage}%)</p>
+        <h3 class="text-xl md:text-2xl font-bold text-wabi-text dark:text-tokyo-text">{visitedCount} of {totalPrefectures} Prefectures Visited</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Exploration Grid (Equal Width & Equal Height Columns) -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+
+    <!-- Map Column (Full Height Card) -->
+    <div class="bg-wabi-surface/50 dark:bg-tokyo-surface/40 p-4 sm:p-7 rounded-3xl border border-wabi-secondary/20 dark:border-tokyo-secondary/20 relative shadow-sm flex flex-col justify-between h-full">
+
+      <!-- Map Header: Legend & Active Province Indicator -->
+      <div class="w-full flex flex-wrap items-center justify-between gap-3 mb-4 pb-3 border-b border-wabi-secondary/10 dark:border-tokyo-secondary/10 text-xs sm:text-sm">
+        <div class="flex items-center gap-4">
+          <div class="flex items-center gap-2">
+            <span class="w-3.5 h-3.5 rounded-md bg-[#EB5E28] border border-[#c44615] shadow-xs"></span>
+            <span class="font-semibold text-wabi-text dark:text-tokyo-text">Visited ({visitedCount})</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-3.5 h-3.5 rounded-md bg-[#e8e1d5] dark:bg-[#33312e] border border-[#dcd4c6] dark:border-[#54504a] shadow-xs"></span>
+            <span class="text-wabi-secondary dark:text-tokyo-secondary font-medium">Not Visited ({totalPrefectures - visitedCount})</span>
+          </div>
+        </div>
+
+        <!-- Live Active Province Indicator Pill -->
+        <div id="map-active-badge" class="flex items-center gap-2 px-3 py-1 rounded-xl bg-wabi-card dark:bg-tokyo-card border border-wabi-secondary/20 dark:border-tokyo-secondary/20 shadow-xs transition-all duration-150">
+          <span id="active-badge-dot" class="w-2.5 h-2.5 rounded-full bg-wabi-secondary/40 shrink-0 transition-colors duration-200"></span>
+          <span id="active-badge-text" class="text-xs font-semibold text-wabi-secondary dark:text-tokyo-secondary">
+            Hover prefecture on map
+          </span>
+        </div>
+      </div>
+
+      <!-- SVG Map Canvas Wrapper -->
+      <div id="map-canvas-wrapper" class="relative w-full flex-1 aspect-square max-h-[560px] mx-auto flex items-center justify-center select-none my-auto">
+
+        <!-- Okinawa Inset Label -->
+        <div class="absolute top-2 left-2 z-10 px-2.5 py-1 rounded-md bg-wabi-bg/90 dark:bg-tokyo-bg/90 border border-wabi-secondary/20 dark:border-tokyo-secondary/20 text-[11px] font-semibold text-wabi-secondary dark:text-tokyo-secondary pointer-events-none backdrop-blur-xs">
+          沖縄 / Okinawa <span class="opacity-60 text-[10px]">(Inset)</span>
+        </div>
+
+        <svg
+          id="japan-interactive-map"
+          class="w-full h-full object-contain filter drop-shadow-sm"
+          viewBox="0 0 1000 1000"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g class="svg-map" transform="matrix(1.028807, 0, 0, 1.028807, -47.544239, -28.806583)">
+            <g class="prefectures" transform="matrix(1, 0, 0, 1, 6, 18)">
+              {prefecturesList.map((p) => {
+                const isVisited = visitedSet.has(p.romaji);
+                return (
+                  <g
+                    class={`prefecture-group cursor-pointer transition-all duration-150 ${isVisited ? 'is-visited' : 'is-unvisited'}`}
+                    fill={isVisited ? '#EB5E28' : '#e8e1d5'}
+                    stroke={isVisited ? '#c44615' : '#dcd4c6'}
+                    stroke-width="0.8"
+                    stroke-linejoin="round"
+                    data-code={p.code}
+                    data-romaji={p.romaji}
+                    data-kanji={p.kanji}
+                    data-region={p.region}
+                    data-region-ja={p.regionJa}
+                    data-visited={isVisited ? 'true' : 'false'}
+                    transform={p.transform}
+                    set:html={p.innerSvg}
+                  />
+                );
+              })}
+            </g>
+
+            <!-- Okinawa Inset Separator Line -->
+            <g class="boundary-line" stroke="currentColor" stroke-width="1.8" stroke-dasharray="4,4" stroke-linecap="round">
+              <line x1="320.227" y1="361.996" x2="582.351" y2="109.378" class="text-wabi-secondary/40 dark:text-tokyo-secondary/40" />
+              <line x1="277.337" y1="380.162" x2="46.213" y2="380.162" class="text-wabi-secondary/40 dark:text-tokyo-secondary/40" />
+            </g>
+          </g>
+        </svg>
+
+        <!-- Floating Cursor Tooltip -->
+        <div
+          id="map-floating-tooltip"
+          class="pointer-events-none absolute z-50 px-3.5 py-2.5 rounded-xl bg-wabi-card/95 dark:bg-tokyo-card/95 text-wabi-text dark:text-tokyo-text shadow-xl border border-wabi-secondary/30 dark:border-tokyo-secondary/30 backdrop-blur-md text-xs font-sans whitespace-nowrap -translate-x-1/2 -translate-y-full mb-3"
+          style="pointer-events: none !important; display: none;"
+        >
+          <div class="flex items-center gap-2">
+            <span id="tooltip-status-dot" class="w-2.5 h-2.5 rounded-full bg-[#EB5E28] shrink-0"></span>
+            <span id="tooltip-name" class="font-bold text-sm">Tokyo</span>
+            <span id="tooltip-kanji" class="font-serif text-xs opacity-75">東京都</span>
+          </div>
+          <div class="flex items-center gap-2 mt-0.5 text-[11px] text-wabi-secondary dark:text-tokyo-secondary">
+            <span id="tooltip-region">Kanto Region</span>
+            <span>•</span>
+            <span id="tooltip-status-text" class="font-bold text-[#EB5E28]">✓ Visited</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exploration Details Column (Matching Full Height & Aligned Bottom) -->
+    <div class="flex flex-col justify-between h-full space-y-6">
+
+      <!-- Regional Progress Completion Bars Card (Compact 2-Column Grid) -->
+      <div class="bg-wabi-card dark:bg-tokyo-card p-5 sm:p-6 rounded-3xl border border-wabi-secondary/20 dark:border-tokyo-secondary/20 shadow-md flex flex-col space-y-3">
+        <div class="flex items-center justify-between pb-2.5 border-b border-wabi-secondary/10 dark:border-tokyo-secondary/10">
+          <h4 class="text-xs sm:text-sm uppercase tracking-wider font-bold text-wabi-text dark:text-tokyo-text flex items-center gap-2">
+            <svg class="w-4 h-4 text-wabi-accent dark:text-tokyo-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+            Regional Progress
+          </h4>
+          <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-wabi-accent/10 dark:bg-tokyo-accent/15 text-wabi-accent dark:text-tokyo-accent border border-wabi-accent/20 dark:border-tokyo-accent/30 font-mono">
+            {visitedCount} / {totalPrefectures} ({visitedPercentage}%)
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-2.5 pt-1">
+          {regionsSummary.map(r => {
+            const pct = Math.round((r.visited / r.total) * 100);
+            return (
+              <div
+                class="region-progress-row cursor-pointer group/row"
+                data-region={r.name.toLowerCase()}
+              >
+                <div class="flex items-center justify-between text-xs mb-1">
+                  <span class="font-semibold text-wabi-text dark:text-tokyo-text group-hover/row:text-wabi-accent dark:group-hover/row:text-tokyo-accent transition-colors">
+                    {r.name} <span class="text-[11px] font-serif opacity-60">({r.nameJa})</span>
+                  </span>
+                  <span class="font-mono text-wabi-secondary dark:text-tokyo-secondary text-[11px]">
+                    {r.visited}/{r.total} <span class="opacity-70">({pct}%)</span>
+                  </span>
+                </div>
+                <div class="w-full h-1.5 rounded-full bg-wabi-secondary/15 dark:bg-tokyo-secondary/20 overflow-hidden">
+                  <div
+                    class={`h-full rounded-full transition-all duration-500 ${pct > 0 ? 'bg-wabi-accent dark:bg-tokyo-accent' : 'bg-transparent'}`}
+                    style={`width: ${pct}%`}
+                  ></div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <!-- All Prefectures by Region Card (All 47 Shown, Non-Visited Disabled) -->
+      <div class="bg-wabi-card dark:bg-tokyo-card p-5 sm:p-6 rounded-3xl border border-wabi-secondary/20 dark:border-tokyo-secondary/20 shadow-md flex flex-col flex-1 space-y-3">
+        <div class="flex items-center justify-between pb-2.5 border-b border-wabi-secondary/10 dark:border-tokyo-secondary/10">
+          <h4 class="text-xs sm:text-sm uppercase tracking-wider font-bold text-wabi-text dark:text-tokyo-text flex items-center gap-2">
+            <svg class="w-4 h-4 text-wabi-accent dark:text-tokyo-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            Prefectures by Region
+          </h4>
+          <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-wabi-accent/10 dark:bg-tokyo-accent/15 text-wabi-accent dark:text-tokyo-accent border border-wabi-accent/20 dark:border-tokyo-accent/30 font-mono">
+            {visitedCount} / {totalPrefectures} Visited
+          </span>
+        </div>
+
+        <div class="space-y-3 pt-0.5 overflow-y-auto max-h-[380px] sm:max-h-[420px] pr-1">
+          {allRegionsWithPrefectures.map(r => (
+            <div class="space-y-1">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-bold text-wabi-accent dark:text-tokyo-accent uppercase tracking-wider text-[11px] flex items-center gap-1.5">
+                  {r.name}
+                  <span class="text-[10px] font-serif opacity-60">({r.nameJa})</span>
+                </span>
+                <span class="text-wabi-secondary dark:text-tokyo-secondary text-[11px] font-mono">
+                  {r.visited} / {r.total} visited
+                </span>
+              </div>
+              <div class="flex flex-wrap gap-1.5">
+                {r.prefectures.map(p => {
+                  const isVisited = visitedSet.has(p.romaji);
+                  return (
+                    <span
+                      class={`prefecture-pill px-2.5 py-1 text-xs rounded-lg font-medium transition-all cursor-pointer ${
+                        isVisited
+                          ? 'bg-[#EB5E28]/10 text-wabi-text dark:text-tokyo-text border border-[#EB5E28]/40 hover:bg-[#EB5E28] hover:text-white dark:hover:text-white font-semibold shadow-2xs'
+                          : 'bg-wabi-surface/40 dark:bg-tokyo-surface/25 text-wabi-secondary/40 dark:text-tokyo-secondary/35 border border-wabi-secondary/10 dark:border-tokyo-secondary/10 hover:border-wabi-secondary/30 hover:text-wabi-secondary dark:hover:text-tokyo-secondary opacity-50 hover:opacity-90'
+                      }`}
+                      data-prefecture={p.romaji}
+                      data-visited={isVisited ? 'true' : 'false'}
+                      title={`${p.romaji} (${p.kanji})${isVisited ? ' - Visited' : ' - Not visited'}`}
+                    >
+                      {isVisited ? (
+                        <span class="inline-flex items-center gap-1">
+                          <span class="w-1.5 h-1.5 rounded-full bg-[#EB5E28] shrink-0"></span>
+                          {p.romaji}
+                        </span>
+                      ) : (
+                        <span>{p.romaji}</span>
+                      )}
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<style is:global>
+  /* Global SVG Styling for Dynamic Inner Paths */
+  #japan-interactive-map .prefecture-group polygon,
+  #japan-interactive-map .prefecture-group path {
+    transition: fill 0.15s ease, stroke 0.15s ease;
+    stroke-linejoin: round;
+  }
+
+  /* Visited Prefectures: Flame Orange (#EB5E28) */
+  #japan-interactive-map .prefecture-group.is-visited polygon,
+  #japan-interactive-map .prefecture-group.is-visited path {
+    fill: #EB5E28 !important;
+    stroke: #c44615 !important;
+    stroke-width: 0.8px !important;
+  }
+
+  html.dark #japan-interactive-map .prefecture-group.is-visited polygon,
+  html.dark #japan-interactive-map .prefecture-group.is-visited path {
+    fill: #EB5E28 !important;
+    stroke: #872e09 !important;
+    stroke-width: 0.8px !important;
+  }
+
+  /* Unvisited Prefectures: Light Sand (#e8e1d5) / Dark Charcoal (#33312e) */
+  #japan-interactive-map .prefecture-group.is-unvisited polygon,
+  #japan-interactive-map .prefecture-group.is-unvisited path {
+    fill: #e8e1d5 !important;
+    stroke: #dcd4c6 !important;
+    stroke-width: 0.8px !important;
+  }
+
+  html.dark #japan-interactive-map .prefecture-group.is-unvisited polygon,
+  html.dark #japan-interactive-map .prefecture-group.is-unvisited path {
+    fill: #33312e !important;
+    stroke: #44403c !important;
+    stroke-width: 0.8px !important;
+  }
+
+  /* Smooth Vector Hover: Visited */
+  #japan-interactive-map .prefecture-group.is-visited:hover polygon,
+  #japan-interactive-map .prefecture-group.is-visited:hover path,
+  #japan-interactive-map .prefecture-group.is-visited.is-active polygon,
+  #japan-interactive-map .prefecture-group.is-visited.is-active path {
+    fill: #f2794b !important;
+    stroke: #ffffff !important;
+  }
+
+  html.dark #japan-interactive-map .prefecture-group.is-visited:hover polygon,
+  html.dark #japan-interactive-map .prefecture-group.is-visited:hover path,
+  html.dark #japan-interactive-map .prefecture-group.is-visited.is-active path {
+    fill: #ff6f3c !important;
+    stroke: #ffffff !important;
+  }
+
+  /* Smooth Vector Hover: Unvisited */
+  #japan-interactive-map .prefecture-group.is-unvisited:hover polygon,
+  #japan-interactive-map .prefecture-group.is-unvisited:hover path,
+  #japan-interactive-map .prefecture-group.is-unvisited.is-active polygon,
+  #japan-interactive-map .prefecture-group.is-unvisited.is-active path {
+    fill: #d8cebd !important;
+    stroke: #8c8275 !important;
+  }
+
+  html.dark #japan-interactive-map .prefecture-group.is-unvisited:hover polygon,
+  html.dark #japan-interactive-map .prefecture-group.is-unvisited:hover path,
+  html.dark #japan-interactive-map .prefecture-group.is-unvisited.is-active polygon,
+  html.dark #japan-interactive-map .prefecture-group.is-unvisited.is-active path {
+    fill: #4e4b45 !important;
+    stroke: #CCC5B9 !important;
+  }
+
+  /* Region Dimmed Filter State */
+  #japan-interactive-map .prefecture-group.is-dimmed {
+    opacity: 0.22;
+  }
+
+  #japan-interactive-map .prefecture-group.is-region-highlighted polygon,
+  #japan-interactive-map .prefecture-group.is-region-highlighted path {
+    stroke: #ffffff !important;
+  }
+
+  /* Tooltip Pointer-Events Prevention */
+  #map-floating-tooltip,
+  #map-floating-tooltip * {
+    pointer-events: none !important;
+  }
+</style>
+
+<script>
+  function initJapanMap() {
+    const map = document.getElementById('japan-interactive-map');
+    const mapCanvasWrapper = document.getElementById('map-canvas-wrapper');
+    if (!map || !mapCanvasWrapper) return;
+
+    // Floating Tooltip elements
+    const tooltip = document.getElementById('map-floating-tooltip');
+    const tooltipName = document.getElementById('tooltip-name');
+    const tooltipKanji = document.getElementById('tooltip-kanji');
+    const tooltipRegion = document.getElementById('tooltip-region');
+    const tooltipStatusDot = document.getElementById('tooltip-status-dot');
+    const tooltipStatusText = document.getElementById('tooltip-status-text');
+
+    // Header Live Province Indicator elements
+    const activeBadgeDot = document.getElementById('active-badge-dot');
+    const activeBadgeText = document.getElementById('active-badge-text');
+
+    const groups = map.querySelectorAll<SVGGElement>('.prefecture-group');
+    const regionRows = document.querySelectorAll<HTMLElement>('.region-progress-row');
+    const prefecturePills = document.querySelectorAll<HTMLElement>('.prefecture-pill');
+
+    let currentHovered: SVGGElement | null = null;
+    let currentSelected: SVGGElement | null = null;
+    let activeRegionFilter: string | null = null;
+
+    function updateDisplay(group: SVGGElement) {
+      const romaji = group.getAttribute('data-romaji') || '';
+      const kanji = group.getAttribute('data-kanji') || '';
+      const region = group.getAttribute('data-region') || '';
+      const isVisited = group.getAttribute('data-visited') === 'true';
+
+      // 1. Update Floating Tooltip
+      if (tooltip && tooltipName && tooltipKanji && tooltipRegion && tooltipStatusDot && tooltipStatusText) {
+        tooltipName.textContent = romaji;
+        tooltipKanji.textContent = kanji;
+        tooltipRegion.textContent = `${region} Region`;
+
+        if (isVisited) {
+          tooltipStatusDot.className = 'w-2.5 h-2.5 rounded-full bg-[#EB5E28] shrink-0';
+          tooltipStatusText.textContent = '✓ Visited';
+          tooltipStatusText.className = 'font-bold text-[#EB5E28]';
+        } else {
+          tooltipStatusDot.className = 'w-2.5 h-2.5 rounded-full bg-[#a8a196] shrink-0';
+          tooltipStatusText.textContent = 'Not yet visited';
+          tooltipStatusText.className = 'font-medium text-wabi-secondary dark:text-tokyo-secondary';
+        }
+
+        tooltip.style.display = 'block';
+      }
+
+      // 2. Update Header Live Province Indicator
+      if (activeBadgeDot && activeBadgeText) {
+        if (isVisited) {
+          activeBadgeDot.className = 'w-2.5 h-2.5 rounded-full bg-[#EB5E28] shrink-0';
+          activeBadgeText.innerHTML = `<span class="font-bold text-wabi-text dark:text-tokyo-text">${romaji}</span> <span class="font-serif opacity-75">(${kanji})</span> • ${region} • <span class="text-[#EB5E28] font-bold">✓ Visited</span>`;
+        } else {
+          activeBadgeDot.className = 'w-2.5 h-2.5 rounded-full bg-[#a8a196] shrink-0';
+          activeBadgeText.innerHTML = `<span class="font-bold text-wabi-text dark:text-tokyo-text">${romaji}</span> <span class="font-serif opacity-75">(${kanji})</span> • ${region} • <span class="text-wabi-secondary">Wishlist</span>`;
+        }
+      }
+    }
+
+    function resetDisplay() {
+      if (tooltip) {
+        tooltip.style.display = 'none';
+      }
+      if (activeBadgeDot && activeBadgeText) {
+        activeBadgeDot.className = 'w-2.5 h-2.5 rounded-full bg-wabi-secondary/40 shrink-0';
+        activeBadgeText.textContent = 'Hover prefecture on map';
+      }
+    }
+
+    // Flicker-free event delegation on map container
+    map.addEventListener('mousemove', (e) => {
+      const target = (e.target as Element).closest('.prefecture-group') as SVGGElement | null;
+      if (target) {
+        if (currentHovered !== target) {
+          currentHovered = target;
+          updateDisplay(target);
+        }
+        if (tooltip) {
+          const rect = mapCanvasWrapper.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          tooltip.style.left = `${x}px`;
+          tooltip.style.top = `${y - 12}px`;
+        }
+      } else {
+        if (currentHovered) {
+          currentHovered = null;
+          resetDisplay();
+        }
+      }
+    });
+
+    map.addEventListener('mouseleave', () => {
+      currentHovered = null;
+      resetDisplay();
+    });
+
+    // Prefecture click toggle
+    map.addEventListener('click', (e) => {
+      const target = (e.target as Element).closest('.prefecture-group') as SVGGElement | null;
+      if (!target) return;
+
+      if (currentSelected) {
+        currentSelected.classList.remove('is-active');
+      }
+      if (currentSelected === target) {
+        currentSelected = null;
+      } else {
+        currentSelected = target;
+        target.classList.add('is-active');
+      }
+    });
+
+    // Regional progress row click highlights/toggles region
+    regionRows.forEach(row => {
+      row.addEventListener('click', () => {
+        const region = row.getAttribute('data-region') || '';
+        if (activeRegionFilter === region) {
+          // Toggle off
+          activeRegionFilter = null;
+          groups.forEach(group => {
+            group.classList.remove('is-dimmed');
+            group.classList.remove('is-region-highlighted');
+          });
+        } else {
+          // Highlight this region
+          activeRegionFilter = region;
+          groups.forEach(group => {
+            const groupRegion = (group.getAttribute('data-region') || '').toLowerCase();
+            if (groupRegion === region || (region === 'kyushu' && groupRegion === 'okinawa')) {
+              group.classList.remove('is-dimmed');
+              group.classList.add('is-region-highlighted');
+            } else {
+              group.classList.add('is-dimmed');
+              group.classList.remove('is-region-highlighted');
+            }
+          });
+        }
+      });
+    });
+
+    // Prefecture pills click highlights corresponding prefecture on map
+    prefecturePills.forEach(pill => {
+      const prefName = pill.getAttribute('data-prefecture');
+      pill.addEventListener('mouseenter', () => {
+        const group = map.querySelector<SVGGElement>(`[data-romaji="${prefName}"]`);
+        if (group) {
+          group.classList.add('is-active');
+          updateDisplay(group);
+        }
+      });
+      pill.addEventListener('mouseleave', () => {
+        const group = map.querySelector<SVGGElement>(`[data-romaji="${prefName}"]`);
+        if (group && group !== currentSelected) {
+          group.classList.remove('is-active');
+          resetDisplay();
+        }
+      });
+    });
+  }
+
+  // Support Astro View Transitions
+  document.addEventListener('astro:page-load', initJapanMap);
+</script>
