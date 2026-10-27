@@ -11,6 +11,10 @@ export interface Prefecture {
 
 // Visited prefectures list - easily add future destinations here!
 export const visitedPrefectureNames: string[] = [
+  // Hokkaido
+  'Hokkaido',
+  // Tohoku
+  'Aomori',
   // Kanto
   'Tokyo', 'Kanagawa', 'Saitama', 'Chiba', 'Ibaraki', 'Tochigi', 'Gunma',
   // Chubu

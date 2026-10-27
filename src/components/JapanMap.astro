@@ -11,44 +11,43 @@ const visitedCount = visitedPrefectureNames.length; // 29
 const visitedPercentage = Math.round((visitedCount / totalPrefectures) * 100);
 
 // Group prefectures by region for regional stats and breakdowns
-const regionsSummary = [
-  { name: 'Kanto', nameJa: '関東', total: 7, visited: 7 },
-  { name: 'Chubu', nameJa: '中部', total: 9, visited: 9 },
-  { name: 'Kansai', nameJa: '関西', total: 7, visited: 5 },
-  { name: 'Chugoku', nameJa: '中国', total: 5, visited: 3 },
-  { name: 'Kyushu', nameJa: '九州', total: 8, visited: 5 }, // including Okinawa
-  { name: 'Tohoku', nameJa: '東北', total: 6, visited: 0 },
-  { name: 'Shikoku', nameJa: '四国', total: 4, visited: 0 },
-  { name: 'Hokkaido', nameJa: '北海道', total: 1, visited: 0 },
+const regionMeta = [
+  { name: 'Kanto', nameJa: '関東' },
+  { name: 'Chubu', nameJa: '中部' },
+  { name: 'Kansai', nameJa: '関西' },
+  { name: 'Chugoku', nameJa: '中国' },
+  { name: 'Kyushu', nameJa: '九州' }, // including Okinawa
+  { name: 'Tohoku', nameJa: '東北' },
+  { name: 'Shikoku', nameJa: '四国' },
+  { name: 'Hokkaido', nameJa: '北海道' },
 ];
 
-const regionOrder = ["Kanto", "Chubu", "Kansai", "Chugoku", "Kyushu", "Tohoku", "Shikoku", "Hokkaido"];
-
-const allRegionsWithPrefectures = regionOrder.map(rName => {
+const allRegionsWithPrefectures = regionMeta.map(rm => {
   const prefs = prefecturesList.filter(p => {
-    if (rName === 'Kyushu') {
+    if (rm.name === 'Kyushu') {
       return p.region === 'Kyushu' || p.region === 'Okinawa';
     }
-    return p.region === rName;
+    return p.region === rm.name;
   });
   const visitedInRegion = prefs.filter(p => visitedSet.has(p.romaji)).length;
-  const regSummary = regionsSummary.find(r => r.name === rName);
   return {
-    name: rName,
-    nameJa: regSummary?.nameJa || '',
+    name: rm.name,
+    nameJa: rm.nameJa,
     total: prefs.length,
     visited: visitedInRegion,
     prefectures: prefs
   };
 });
+
+const regionsSummary = allRegionsWithPrefectures;
 ---
 
 <div class="w-full flex flex-col space-y-8" id="japan-map-container">
   <!-- Key Stats Header (2 Balanced Highlight Cards) -->
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
     <div class="bg-wabi-surface/80 dark:bg-tokyo-surface/80 p-6 rounded-2xl border border-wabi-secondary/20 dark:border-tokyo-secondary/20 shadow-sm flex items-center gap-5">
-      <div class="w-14 h-14 rounded-2xl bg-wabi-accent/10 dark:bg-tokyo-accent/15 flex items-center justify-center text-wabi-accent dark:text-tokyo-accent text-2xl font-black shrink-0 border border-wabi-accent/20 dark:border-tokyo-accent/30 shadow-inner">
-        10
+      <div id="stat-trips-count" class="w-14 h-14 rounded-2xl bg-wabi-accent/10 dark:bg-tokyo-accent/15 flex items-center justify-center text-wabi-accent dark:text-tokyo-accent text-2xl font-black shrink-0 border border-wabi-accent/20 dark:border-tokyo-accent/30 shadow-inner">
+        11
       </div>
       <div>
         <p class="text-xs uppercase tracking-wider text-wabi-secondary dark:text-tokyo-secondary font-semibold">Journeys</p>
@@ -57,7 +56,7 @@ const allRegionsWithPrefectures = regionOrder.map(rName => {
     </div>
 
     <div class="bg-wabi-surface/80 dark:bg-tokyo-surface/80 p-6 rounded-2xl border border-wabi-secondary/20 dark:border-tokyo-secondary/20 shadow-sm flex items-center gap-5">
-      <div class="w-14 h-14 rounded-2xl bg-wabi-accent/10 dark:bg-tokyo-accent/15 flex items-center justify-center text-wabi-accent dark:text-tokyo-accent text-xl font-black shrink-0 border border-wabi-accent/20 dark:border-tokyo-accent/30 shadow-inner">
+      <div id="stat-visited-count" class="w-14 h-14 rounded-2xl bg-wabi-accent/10 dark:bg-tokyo-accent/15 flex items-center justify-center text-wabi-accent dark:text-tokyo-accent text-xl font-black shrink-0 border border-wabi-accent/20 dark:border-tokyo-accent/30 shadow-inner">
         {visitedCount}
       </div>
       <div>
@@ -357,7 +356,10 @@ const allRegionsWithPrefectures = regionOrder.map(rName => {
 </style>
 
 <script>
+  import { initSecretFootprintTrigger } from '../utils/exportStoryImage';
+
   function initJapanMap() {
+    initSecretFootprintTrigger();
     const map = document.getElementById('japan-interactive-map');
     const mapCanvasWrapper = document.getElementById('map-canvas-wrapper');
     if (!map || !mapCanvasWrapper) return;

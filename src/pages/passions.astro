@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import JapanMap from '../components/JapanMap.astro';
+import { visitedPrefectureNames } from '../data/japanPrefectures';
 
 const jpopArtists = ["Yuuri", "Mrs. GREEN APPLE", "Back Number", "Official Hige Dandism"];
 const animeList = ["Kimetsu no Yaiba", "Jujutsu Kaisen", "Attack on Titan", "DAN DA DAN"];
@@ -103,12 +104,12 @@ const profileCarouselImages = [
               🗾
             </div>
             <div>
-              <h2 class="text-3xl font-bold text-wabi-text dark:text-tokyo-text">Travel Footprint</h2>
+              <h2 id="travel-footprint-title" class="text-3xl font-bold text-wabi-text dark:text-tokyo-text cursor-default select-none">Travel Footprint</h2>
               <p class="text-sm font-medium text-wabi-accent dark:text-tokyo-accent">Interactive Prefecture Map of Japan</p>
             </div>
           </div>
           <p class="text-wabi-secondary dark:text-tokyo-secondary text-lg mb-8 leading-relaxed max-w-3xl">
-            My love for exploring Japan has taken me through <strong class="text-wabi-accent dark:text-tokyo-accent font-bold">29 of 47 prefectures</strong> across Honshu and Kyushu. Explore the interactive map below to view the regions and provinces I've visited.
+            My love for exploring Japan has taken me through <strong class="text-wabi-accent dark:text-tokyo-accent font-bold">{visitedPrefectureNames.length} of 47 prefectures</strong> across Hokkaido, Honshu, and Kyushu. Explore the interactive map below to view the regions and provinces I've visited.
           </p>
 
           <JapanMap />
