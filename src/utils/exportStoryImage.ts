@@ -115,10 +115,9 @@ export async function exportInstagramStoryImage(): Promise<void> {
     const tripsEl = document.getElementById('stat-trips-count');
     const tripsCount = tripsEl?.textContent?.trim() || '11';
 
-    const visitedPrefGroups = document.querySelectorAll<SVGGElement>('#japan-interactive-map .prefecture-group[data-visited="true"]');
-    const allPrefGroups = document.querySelectorAll<SVGGElement>('#japan-interactive-map .prefecture-group');
-    const visitedCount = visitedPrefGroups.length || 31;
-    const totalCount = allPrefGroups.length || 47;
+    const visitedCountEl = document.getElementById('stat-visited-count');
+    const visitedCount = visitedCountEl ? parseInt(visitedCountEl.textContent?.trim() || '31', 10) : 31;
+    const totalCount = 47; // Official 47 Prefectures of Japan
     const coveragePct = Math.round((visitedCount / totalCount) * 100);
 
     // Extract REAL regional progress from .region-progress-row elements on the page

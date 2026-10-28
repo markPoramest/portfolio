@@ -6,8 +6,8 @@ import {
 
 // Calculate visited stats
 const visitedSet = new Set(visitedPrefectureNames);
-const totalPrefectures = prefecturesList.length; // 47
-const visitedCount = visitedPrefectureNames.length; // 29
+const totalPrefectures = 47; // Official 47 prefectures of Japan
+const visitedCount = visitedPrefectureNames.length; // 31
 const visitedPercentage = Math.round((visitedCount / totalPrefectures) * 100);
 
 // Group prefectures by region for regional stats and breakdowns
@@ -23,7 +23,29 @@ const regionMeta = [
 ];
 
 const allRegionsWithPrefectures = regionMeta.map(rm => {
+  if (rm.name === 'Hokkaido') {
+    const isHokkaidoVisited = visitedSet.has('Hokkaido') || visitedSet.has('Dounan & Douou');
+    return {
+      name: rm.name,
+      nameJa: rm.nameJa,
+      total: 1,
+      visited: isHokkaidoVisited ? 1 : 0,
+      prefectures: [
+        {
+          code: 1,
+          romaji: 'Hokkaido',
+          kanji: '北海道',
+          region: 'Hokkaido',
+          regionJa: '北海道',
+          transform: '',
+          innerSvg: ''
+        }
+      ]
+    };
+  }
+
   const prefs = prefecturesList.filter(p => {
+    if (p.isSubRegion) return false;
     if (rm.name === 'Kyushu') {
       return p.region === 'Kyushu' || p.region === 'Okinawa';
     }
@@ -73,22 +95,22 @@ const regionsSummary = allRegionsWithPrefectures;
     <div class="bg-wabi-surface/50 dark:bg-tokyo-surface/40 p-4 sm:p-7 rounded-3xl border border-wabi-secondary/20 dark:border-tokyo-secondary/20 relative shadow-sm flex flex-col justify-between h-full">
 
       <!-- Map Header: Legend & Active Province Indicator -->
-      <div class="w-full flex flex-wrap items-center justify-between gap-3 mb-4 pb-3 border-b border-wabi-secondary/10 dark:border-tokyo-secondary/10 text-xs sm:text-sm">
-        <div class="flex items-center gap-4">
+      <div class="w-full flex items-center justify-between gap-3 mb-4 pb-3 border-b border-wabi-secondary/10 dark:border-tokyo-secondary/10 text-xs sm:text-sm min-h-[42px]">
+        <div class="flex items-center gap-4 shrink-0">
           <div class="flex items-center gap-2">
             <span class="w-3.5 h-3.5 rounded-md bg-[#EB5E28] border border-[#c44615] shadow-xs"></span>
-            <span class="font-semibold text-wabi-text dark:text-tokyo-text">Visited ({visitedCount})</span>
+            <span class="font-semibold text-wabi-text dark:text-tokyo-text whitespace-nowrap">Visited ({visitedCount})</span>
           </div>
           <div class="flex items-center gap-2">
             <span class="w-3.5 h-3.5 rounded-md bg-[#e8e1d5] dark:bg-[#33312e] border border-[#dcd4c6] dark:border-[#54504a] shadow-xs"></span>
-            <span class="text-wabi-secondary dark:text-tokyo-secondary font-medium">Not Visited ({totalPrefectures - visitedCount})</span>
+            <span class="text-wabi-secondary dark:text-tokyo-secondary font-medium whitespace-nowrap">Not Visited ({totalPrefectures - visitedCount})</span>
           </div>
         </div>
 
         <!-- Live Active Province Indicator Pill -->
-        <div id="map-active-badge" class="flex items-center gap-2 px-3 py-1 rounded-xl bg-wabi-card dark:bg-tokyo-card border border-wabi-secondary/20 dark:border-tokyo-secondary/20 shadow-xs transition-all duration-150">
+        <div id="map-active-badge" class="flex items-center gap-2 px-3 py-1 rounded-xl bg-wabi-card dark:bg-tokyo-card border border-wabi-secondary/20 dark:border-tokyo-secondary/20 shadow-xs transition-all duration-150 shrink min-w-0 max-w-[55%]">
           <span id="active-badge-dot" class="w-2.5 h-2.5 rounded-full bg-wabi-secondary/40 shrink-0 transition-colors duration-200"></span>
-          <span id="active-badge-text" class="text-xs font-semibold text-wabi-secondary dark:text-tokyo-secondary">
+          <span id="active-badge-text" class="text-xs font-semibold text-wabi-secondary dark:text-tokyo-secondary truncate whitespace-nowrap block">
             Hover prefecture on map
           </span>
         </div>
@@ -111,7 +133,7 @@ const regionsSummary = allRegionsWithPrefectures;
           <g class="svg-map" transform="matrix(1.028807, 0, 0, 1.028807, -47.544239, -28.806583)">
             <g class="prefectures" transform="matrix(1, 0, 0, 1, 6, 18)">
               {prefecturesList.map((p) => {
-                const isVisited = visitedSet.has(p.romaji);
+                const isVisited = visitedSet.has(p.romaji) || (p.region === 'Hokkaido' && p.romaji === 'Dounan & Douou' && visitedSet.has('Hokkaido'));
                 return (
                   <g
                     class={`prefecture-group cursor-pointer transition-all duration-150 ${isVisited ? 'is-visited' : 'is-unvisited'}`}
@@ -234,7 +256,7 @@ const regionsSummary = allRegionsWithPrefectures;
               </div>
               <div class="flex flex-wrap gap-1.5">
                 {r.prefectures.map(p => {
-                  const isVisited = visitedSet.has(p.romaji);
+                  const isVisited = visitedSet.has(p.romaji) || (p.romaji === 'Hokkaido' && (visitedSet.has('Hokkaido') || visitedSet.has('Dounan & Douou')));
                   return (
                     <span
                       class={`prefecture-pill px-2.5 py-1 text-xs rounded-lg font-medium transition-all cursor-pointer ${
@@ -249,7 +271,7 @@ const regionsSummary = allRegionsWithPrefectures;
                       {isVisited ? (
                         <span class="inline-flex items-center gap-1">
                           <span class="w-1.5 h-1.5 rounded-full bg-[#EB5E28] shrink-0"></span>
-                          {p.romaji}
+                          {p.romaji === 'Hokkaido' ? 'Hokkaido' : p.romaji}
                         </span>
                       ) : (
                         <span>{p.romaji}</span>
@@ -413,10 +435,10 @@ const regionsSummary = allRegionsWithPrefectures;
       if (activeBadgeDot && activeBadgeText) {
         if (isVisited) {
           activeBadgeDot.className = 'w-2.5 h-2.5 rounded-full bg-[#EB5E28] shrink-0';
-          activeBadgeText.innerHTML = `<span class="font-bold text-wabi-text dark:text-tokyo-text">${romaji}</span> <span class="font-serif opacity-75">(${kanji})</span> • ${region} • <span class="text-[#EB5E28] font-bold">✓ Visited</span>`;
+          activeBadgeText.innerHTML = `<span class="font-bold text-wabi-text dark:text-tokyo-text">${romaji}</span> <span class="font-serif opacity-75">(${kanji})</span> • <span class="text-[#EB5E28] font-bold">✓ Visited</span>`;
         } else {
           activeBadgeDot.className = 'w-2.5 h-2.5 rounded-full bg-[#a8a196] shrink-0';
-          activeBadgeText.innerHTML = `<span class="font-bold text-wabi-text dark:text-tokyo-text">${romaji}</span> <span class="font-serif opacity-75">(${kanji})</span> • ${region} • <span class="text-wabi-secondary">Wishlist</span>`;
+          activeBadgeText.innerHTML = `<span class="font-bold text-wabi-text dark:text-tokyo-text">${romaji}</span> <span class="font-serif opacity-75">(${kanji})</span> • <span class="text-wabi-secondary">Wishlist</span>`;
         }
       }
     }
@@ -506,15 +528,21 @@ const regionsSummary = allRegionsWithPrefectures;
     // Prefecture pills click highlights corresponding prefecture on map
     prefecturePills.forEach(pill => {
       const prefName = pill.getAttribute('data-prefecture');
+      const getGroup = () => {
+        if (prefName === 'Hokkaido') {
+          return map.querySelector<SVGGElement>('[data-romaji="Dounan & Douou"]');
+        }
+        return map.querySelector<SVGGElement>(`[data-romaji="${prefName}"]`);
+      };
       pill.addEventListener('mouseenter', () => {
-        const group = map.querySelector<SVGGElement>(`[data-romaji="${prefName}"]`);
+        const group = getGroup();
         if (group) {
           group.classList.add('is-active');
           updateDisplay(group);
         }
       });
       pill.addEventListener('mouseleave', () => {
-        const group = map.querySelector<SVGGElement>(`[data-romaji="${prefName}"]`);
+        const group = getGroup();
         if (group && group !== currentSelected) {
           group.classList.remove('is-active');
           resetDisplay();
