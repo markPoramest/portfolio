@@ -15,7 +15,7 @@ A modern, fast personal portfolio website built with **Astro 7** and **Tailwind 
 
 - **🚀 Featured Projects Tab**:
   - **[Japan Trip Planner](https://plan.marknonihontabi.com/)**: Personal travel workspace with hourly timelines, live dual-currency (JPY ⇄ THB) sync, group bill splitting, transit IC card tracking, and 9:16 Instagram story card exports.
-  - **[Map Animation Generator](https://map-animation-generator.vercel.app/)**: 3D route travel video generator with automated path calculation, 8 transport modes plus custom vehicle image uploads, travel time badges, and 16:9 YouTube export.
+  - **[Map Animation Generator](https://mapgen.marknonihontabi.com/)**: 3D route travel video generator with automated path calculation, 8 transport modes plus custom vehicle image uploads, travel time badges, and 16:9 YouTube export.
 - **💼 Professional Work Journey**:
   - Interactive career timeline with scroll-triggered animations.
   - Case study detail pages driven by Markdown and the **Astro 7 Content Layer** (`glob` loader).
