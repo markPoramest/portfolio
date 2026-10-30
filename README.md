@@ -14,7 +14,7 @@ A modern, fast personal portfolio website built with **Astro 7** and **Tailwind 
 ## ✨ Features
 
 - **🚀 Featured Projects Tab**:
-  - **[Japan Trip Planner](https://japantripplanner.vercel.app/)**: Personal travel workspace with hourly timelines, live dual-currency (JPY ⇄ THB) sync, group bill splitting, transit IC card tracking, and 9:16 Instagram story card exports.
+  - **[Japan Trip Planner](https://plan.marknonihontabi.com/)**: Personal travel workspace with hourly timelines, live dual-currency (JPY ⇄ THB) sync, group bill splitting, transit IC card tracking, and 9:16 Instagram story card exports.
   - **[Map Animation Generator](https://map-animation-generator.vercel.app/)**: 3D route travel video generator with automated path calculation, 8 transport modes plus custom vehicle image uploads, travel time badges, and 16:9 YouTube export.
 - **💼 Professional Work Journey**:
   - Interactive career timeline with scroll-triggered animations.
@@ -23,7 +23,7 @@ A modern, fast personal portfolio website built with **Astro 7** and **Tailwind 
   - Filterable skill stacks covering Programming (Go, Java, Node.js, Flutter, React), Databases, DevOps & Automated Testing.
   - Interactive certificate viewer modals for **JLPT N2** (Japanese) and **CEFR C1** (English).
 - **🗾 Passions & Travel Footprint**:
-  - Japan travel footprint displaying **29 of 47 visited prefectures** across regions (Kanto, Kansai, Chubu, Chugoku, Kyushu).
+  - Japan travel footprint displaying **31 of 47 visited prefectures** across regions (Hokkaido, Tohoku, Kanto, Kansai, Chubu, Chugoku, Kyushu).
   - Infinite photo marquee and social links for *Mark no Nihon Tabi*.
 - **📬 Interactive Contact**:
   - Direct form submission via FormSubmit with responsive status modals.
